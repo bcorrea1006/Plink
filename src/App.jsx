@@ -24,9 +24,9 @@ function App() {
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
-        <p>
+        <h1 className="text-3xl font-bold underline">
           Today I'm feeling somewhat saucy. Hmm yes.
-        </p>
+        </h1>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
