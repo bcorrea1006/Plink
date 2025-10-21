@@ -38,6 +38,7 @@ function App() {
     //     Click on the Vite and React logos to learn more
     //   </p>
     // </>
+
     <div className='min-h-screen flex flex-col items-center justify-center bg-gray-800'>
       <div className='bg-red-500 sm:bg-yellow-500 md:bg-green-500 lg:bg-blue-500 xl:bg-purple-500 h-16 w-16'>
       </div>
