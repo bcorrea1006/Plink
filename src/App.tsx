@@ -1,6 +1,7 @@
 import './App.css';
 import MapWrapper from './components/MapWrapper';
 import type { MarkerData } from './components/MapWrapper';
+import MinMap from './components/MinMap';
 
 function App() {
   const markers: MarkerData[] = [
@@ -36,15 +37,17 @@ function App() {
       </div>
 
       <div className='h-screen w-screen flex flex-col items-center justify-center bg-gray-100'>
-        <h1 className='text-2xl font-bold mb-4'>Plink Draft Map</h1>
+        {/* <h1 className='text-2xl font-bold mb-4'>Plink Draft Map</h1>
         <div className='w-3/4 h-3/f'>
           <MapWrapper
             center={[36.7783, -119.4179]}
             zoom={6}
             markers={markers}
           />
-        </div>
+        </div> */}
       </div>
+
+      <MinMap />
     </>
   );
 }
