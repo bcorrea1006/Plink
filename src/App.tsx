@@ -2,39 +2,27 @@ import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
+import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      <div>
-        <a href='https://vite.dev' target='_blank'>
-          <img src={viteLogo} className='logo' alt='Vite logo' />
-        </a>
-        <a href='https://react.dev' target='_blank'>
-          <img src={reactLogo} className='logo react' alt='React logo' />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className='card'>
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-
-        {/* Testing Tailwind CSS responsive colors: */}
-        <div className='bg-red-500 sm:bg-yellow-500 md:bg-green-500 lg:bg-blue500 xl:bg-purple-500 h-16'>
-          <p className='text-white'>
-            Resize the window to see background color change
-          </p>
-        </div>
-      </div>
-      <p className='read-the-docs'>
-        Click on the Vite and React logos to learn more
-      </p>
+      <MapContainer
+        center={[37.7749, -122.4194]} // coordinates for San Francisco
+        zoom={13}
+        style={{ height: '100vh', width: '100%' }}
+      >
+        <TileLayer
+          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+          attribution='&copy; OpenStreetMap contributors'
+        />
+        {/* <Marker position={[37.7749, -122.4194]}>
+          <Popup>Piano here!</Popup>
+        </Marker> */}
+      </MapContainer>
+      );
     </>
   );
 }
