@@ -13,7 +13,9 @@ function App() {
   return (
     <>
       <div className='h-screen w-screen flex items-center justify-center'>
-        <div style={{ height: '50%', width: '50%'}}> {/* smaller map */}
+        <div style={{ height: '50%', width: '50%' }}>
+          {' '}
+          {/* smaller map */}
           <MinMap />
         </div>
       </div>

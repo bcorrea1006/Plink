@@ -2,7 +2,7 @@
 import { MapContainer, TileLayer } from 'react-leaflet';
 import type { LatLngExpression } from 'leaflet';
 
-const center: LatLngExpression = [40.7128, -74.006]; // NYC
+const center: LatLngExpression = [47.6061, -122.3328]; // SEATTLE
 
 export default function MapWrapper() {
   return (
@@ -10,6 +10,7 @@ export default function MapWrapper() {
       <MapContainer
         center={center}
         zoom={12}
+        style={{ height: '100%', width: '100%' }}
       >
         <TileLayer
           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
