@@ -21,10 +21,15 @@ const MapWrapper: React.FC<MapWrapperProps> = ({
   className = '',
 }) => {
   return (
-    <div className={`relative w-full h-full ${className}`}>
-      <MapContainer center={center} zoom={zoom} className={className}>
+    <div className={`${className}`}>
+      <MapContainer
+        center={center}
+        zoom={zoom}
+        className={className}
+        style={{ height: '100%', width: '100%' }}
+      >
         <TileLayer
-          // This is your current Leaflet tiles - to be swapped out with Mapbox or other provider later
+          // These are my current Leaflet tiles - to be swapped out with Mapbox or other provider later
           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />

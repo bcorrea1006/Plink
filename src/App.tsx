@@ -3,6 +3,8 @@ import MapWrapper from './components/MapWrapper';
 import type { MarkerData } from './components/MapWrapper';
 import MinMap from './components/MinMap';
 
+const defaultZoom: number = 12;
+
 function App() {
   const markers: MarkerData[] = [
     { id: 1, position: [37.7749, -122.4194], label: 'San Francisco 🌉' },
@@ -13,10 +15,13 @@ function App() {
   return (
     <>
       <div className='h-screen w-screen flex items-center justify-center'>
-        <div style={{ height: '50%', width: '50%' }}>
-          {' '}
-          {/* smaller map */}
-          <MinMap />
+        <div className='h-1/2 w-1/2'>
+          <MapWrapper
+            center={[47.6061, -122.3328]}
+            zoom={defaultZoom}
+            markers={markers}
+            className='h-full w-full'
+          />
         </div>
       </div>
     </>
