@@ -1,5 +1,8 @@
 # Plink
+
 Plink is a way to find the location of pianos around your area. Stay tuned!
+
+# LOOK MA NO HANDS!!!
 
 # MVP Checklist
 
@@ -12,6 +15,7 @@ Plink is a way to find the location of pianos around your area. Stay tuned!
 - [ ] PLINK!!S
 
 # Tech Stack
+
 - `Frontend`: React + Vite + TailwindCSS
 - `Map`: React-Leaflet + OpenStreetMap tiles
 - `Backend`: SupaBase (DB, Auth, Storage)
