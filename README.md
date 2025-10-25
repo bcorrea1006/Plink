@@ -2,8 +2,6 @@
 
 Plink is a way to find the location of pianos around your area. Stay tuned!
 
-# LOOK MA NO HANDS!!!
-
 # MVP Checklist
 
 - [ ] Map foundation and hardcoded pianos
