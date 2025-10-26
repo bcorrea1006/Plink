@@ -2,9 +2,12 @@ import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
-export default function MapCenter() {
-  const [position, setPosition] = useState<[number, number] | null>(null);
+interface MapCenterProps {
+  position: [number, number] | null;
+  setPosition: React.Dispatch<React.SetStateAction<[number, number] | null>>;
+}
 
+export default function MapCenter({ position, setPosition }: MapCenterProps) {
   useEffect(() => {
     // Simulate fetching new center position from an API or other source
     if ('geolocation' in navigator) {
@@ -27,15 +30,10 @@ export default function MapCenter() {
   return (
     <div className='h-full w-full'>
       {position ? (
-        <MapContainer
-          center={position}
-          zoom={13}
-          // style={{ height: '100%', width: '100%' }}
-          className='h-full w-full'
-        >
+        <MapContainer center={position} zoom={13} className='h-full w-full'>
           <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
           <Marker position={position}>
             <Popup>You are here!</Popup>
