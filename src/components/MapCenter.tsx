@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import AddButton from './AddButton';
 
 interface MapCenterProps {
   position: [number, number] | null;
@@ -28,9 +29,10 @@ export default function MapCenter({ position, setPosition }: MapCenterProps) {
   }, []);
 
   return (
-    <div className='h-full w-full'>
+    <div className='h-full w-full relative z-0'>
+      <AddButton position={position} />
       {position ? (
-        <MapContainer center={position} zoom={13} className='h-full w-full'>
+        <MapContainer center={position} zoom={13} className='h-full w-full z-0'>
           <TileLayer
             url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

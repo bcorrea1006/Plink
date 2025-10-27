@@ -13,7 +13,7 @@ function App() {
         {/* Pass setPosition so MapCenter can update it */}
         <MapCenter position={position} setPosition={setPosition} />
         {/* Pass position so AddButton can read it */}
-        <AddButton position={position} />
+        {/* <AddButton position={position} /> */}
       </div>
     </>
   );

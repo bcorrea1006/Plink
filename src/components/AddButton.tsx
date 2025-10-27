@@ -6,15 +6,16 @@ interface AddButtonProps {
 
 export default function AddButton({ position }: AddButtonProps) {
   return (
-    <div className='absolute bottom-4 left-4 z-10 bg-white p-2 rounded shadow'>
-      <button
-        onClick={() =>
-          alert(`Location added: ${position ? position : 'Unknown'}`)
-        }
-        className='ml-2 bg-blue-500 text-white px-3 py-1 rounded'
-      >
-        Add
-      </button>
-    </div>
+    <button
+      onClick={() =>
+        alert(`Location added: ${position ? position : 'Unknown'}`)
+      }
+      className='pointer-events-auto absolute bottom-6 right-6 z-[9999]
+             bg-pink-400 hover:bg-pink-700 text-black hover:text-white font-bold
+             rounded-full w-14 aspect-square flex items-center justify-center
+             shadow-lg transition'
+    >
+      +
+    </button>
   );
 }
