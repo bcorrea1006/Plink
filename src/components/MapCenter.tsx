@@ -41,6 +41,9 @@ export default function MapCenter({ position, setPosition }: MapCenterProps) {
             <Popup>You are here!</Popup>
             <RecenterMap position={position} />
           </Marker>
+          <Marker position={[47.66342038920617, -122.32327057882037]}>
+            <Popup>My bedroom lol :D</Popup>
+          </Marker>
         </MapContainer>
       ) : (
         <p className='text-center mt-10'>Fetching location...</p>
