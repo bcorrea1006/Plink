@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { use, useState } from 'react';
 import 'leaflet/dist/leaflet.css';
 import AddButton from './components/AddButton';
 import MapCenter from './components/MapCenter';
@@ -13,7 +13,6 @@ function App() {
         {/* Pass setPosition so MapCenter can update it */}
         <MapCenter position={position} setPosition={setPosition} />
         {/* Pass position so AddButton can read it */}
-        {/* <AddButton position={position} /> */}
       </div>
     </>
   );

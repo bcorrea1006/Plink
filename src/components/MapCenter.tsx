@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import AddButton from './AddButton';
+import PlaxementOverlay from './PlacementOverlay';
 
 interface MapCenterProps {
   position: [number, number] | null;
@@ -9,6 +10,8 @@ interface MapCenterProps {
 }
 
 export default function MapCenter({ position, setPosition }: MapCenterProps) {
+  const [isPlacing, setIsPlacing] = useState(false);
+
   useEffect(() => {
     // Simulate fetching new center position from an API or other source
     if ('geolocation' in navigator) {
@@ -30,7 +33,11 @@ export default function MapCenter({ position, setPosition }: MapCenterProps) {
 
   return (
     <div className='h-full w-full relative z-0'>
-      <AddButton position={position} />
+      <AddButton
+        onStartPlacement={() => setIsPlacing(true)}
+        position={position}
+      />
+      {isPlacing && <PlaxementOverlay onCancel={() => setIsPlacing(false)} />}
       {position ? (
         <MapContainer center={position} zoom={13} className='h-full w-full z-0'>
           <TileLayer
