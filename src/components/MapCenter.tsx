@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import AddButton from './AddButton';
-import PlaxementOverlay from './PlacementOverlay';
+import PlacementOverlay from './PlacementOverlay';
 
 interface MapCenterProps {
   position: [number, number] | null;
@@ -37,13 +37,15 @@ export default function MapCenter({ position, setPosition }: MapCenterProps) {
         onStartPlacement={() => setIsPlacing(true)}
         position={position}
       />
-      {isPlacing && <PlaxementOverlay onCancel={() => setIsPlacing(false)} />}
+      {isPlacing && <PlacementOverlay onCancel={() => setIsPlacing(false)} />}
       {position ? (
         <MapContainer center={position} zoom={13} className='h-full w-full z-0'>
           <TileLayer
             url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
+          {/* Fixing map resizing issues... trying to at least */}
+          {/* <MapResizeFix />{' '} */}
           <Marker position={position}>
             <Popup>You are here!</Popup>
             <RecenterMap position={position} />
@@ -59,11 +61,13 @@ export default function MapCenter({ position, setPosition }: MapCenterProps) {
   );
 }
 
+// Forces Leaflet to recalc size whenever the position changes
 function RecenterMap({ position }: { position: [number, number] }) {
   const map = useMap();
   useEffect(() => {
+    map.invalidateSize(); // Fix container sizing
     map.setView(position);
-  }),
-    [position, map];
+  }, [position, map]);
+
   return null;
 }
