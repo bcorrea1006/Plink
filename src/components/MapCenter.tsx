@@ -7,13 +7,25 @@ import PlacementOverlay from './PlacementOverlay';
 interface MapCenterProps {
   position: [number, number] | null;
   setPosition: React.Dispatch<React.SetStateAction<[number, number] | null>>;
+
+  markers: { id: number; position: [number, number] }[];
+
+  isPlacing: boolean;
+  setIsPlacing: React.Dispatch<React.SetStateAction<boolean>>;
+
+  onPlacementConfirm: (center: [number, number]) => void;
 }
 
-export default function MapCenter({ position, setPosition }: MapCenterProps) {
-  const [isPlacing, setIsPlacing] = useState(false);
-
+export default function MapCenter({
+  position,
+  setPosition,
+  markers,
+  isPlacing,
+  setIsPlacing,
+  onPlacementConfirm,
+}: MapCenterProps) {
   useEffect(() => {
-    // Simulate fetching new center position from an API or other source
+    // Fetch initial location
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         (pos) => {
@@ -35,23 +47,27 @@ export default function MapCenter({ position, setPosition }: MapCenterProps) {
     <div className='h-full w-full relative z-0'>
       <AddButton
         isPlacing={isPlacing}
-        onCancelPlacement={() => setIsPlacing(false)}
-        onStartPlacement={() => setIsPlacing(true)}
-        position={position}
+        onTogglePlacement={() => setIsPlacing((prev) => !prev)}
       />
-      {isPlacing && <PlacementOverlay onCancel={() => setIsPlacing(false)} />}
+      {isPlacing && (
+        <PlacementOverlay
+          onCancel={() => setIsPlacing(false)}
+          onConfirm={onPlacementConfirm}
+        />
+      )}
       {position ? (
         <MapContainer center={position} zoom={13} className='h-full w-full z-0'>
+          <ResizeOnPlacement isPlacing={isPlacing} />
           <TileLayer
             url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
           {/* Fixing map resizing issues... trying to at least */}
           {/* <MapResizeFix />{' '} */}
-          <Marker position={position}>
+          {/* <Marker position={position}>
             <Popup>You are here!</Popup>
             <RecenterMap position={position} />
-          </Marker>
+          </Marker> */}
           <Marker position={[47.66342038920617, -122.32327057882037]}>
             <Popup>My bedroom lol :D</Popup>
           </Marker>
@@ -70,6 +86,18 @@ function RecenterMap({ position }: { position: [number, number] }) {
     map.invalidateSize(); // Fix container sizing
     map.setView(position);
   }, [position, map]);
+
+  return null;
+}
+
+function ResizeOnPlacement({ isPlacing }: { isPlacing: boolean }) {
+  const map = useMap();
+
+  useEffect(() => {
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 50);
+  }, [isPlacing]);
 
   return null;
 }

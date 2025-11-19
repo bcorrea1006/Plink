@@ -1,20 +1,17 @@
 import 'leaflet/dist/leaflet.css';
 
 interface AddButtonProps {
-  position: [number, number] | null;
   isPlacing: boolean; // <-- new prop to track if we are in placement mode
-  onStartPlacement: () => void;
-  onCancelPlacement: () => void; // <-- new prop for cancel
+  onTogglePlacement: () => void;
 }
 
 export default function AddButton({
   isPlacing,
-  onStartPlacement,
-  onCancelPlacement,
+  onTogglePlacement,
 }: AddButtonProps) {
   return (
     <button
-      onClick={isPlacing ? onCancelPlacement : onStartPlacement}
+      onClick={onTogglePlacement}
       className={`
               pointer-events-auto absolute bottom-6 right-6 z-[10001]
             text-black hover:text-white font-bold
@@ -22,7 +19,7 @@ export default function AddButton({
               shadow-lg transition
         ${
           isPlacing
-            ? 'bg-red-500 hover:bg-red-700'
+            ? 'bg-red-600 hover:bg-red-700'
             : 'bg-pink-400 hover:bg-pink-700'
         }
              `}

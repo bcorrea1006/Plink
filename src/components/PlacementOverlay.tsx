@@ -1,11 +1,25 @@
 // PlacementOverlay.tsx
 // A transparent overlay used during placement mode to add the crosshairs
 
+import { useMap } from 'react-leaflet';
+
+interface PlacementOverlayProps {
+  onCancel: () => void;
+  onConfirm: (pos: [number, number]) => void;
+}
+
 export default function PlacementOverlay({
   onCancel,
-}: {
-  onCancel: () => void;
-}) {
+  onConfirm,
+}: PlacementOverlayProps) {
+  const map = useMap();
+
+  const handleConfirm = () => {
+    const center = map.getCenter();
+    onConfirm([center.lat, center.lng]);
+    onCancel();
+  };
+
   return (
     <div className='absolute inset-0 z-[10000] pointer-events-none'>
       {/* slight dim effect apparently */}
@@ -33,12 +47,12 @@ export default function PlacementOverlay({
         </svg>
       </div>
 
-      {/* Cancel Button */}
+      {/* Confirm Button */}
       <button
-        onClick={onCancel}
-        className='absolute bottom-6 left-1/2 -translate-x-1/2 bg-red-600 text-white rounded-full px-6 py-2 z-[10001] pointer-events-auto shadow-lg'
+        onClick={handleConfirm}
+        className='absolute bottom-6 right-6 bg-green-500 text-black px-4 py-2 rounded-lg shadow-2xl'
       >
-        X
+        Place Marker
       </button>
     </div>
   );

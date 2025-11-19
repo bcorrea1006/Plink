@@ -6,6 +6,18 @@ import MapCenter from './components/MapCenter';
 function App() {
   const [position, setPosition] = useState<[number, number] | null>(null);
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
+  const [markers, setMarkers] = useState<
+    { id: number; position: [number, number] }[]
+  >([]);
+
+  const [isPlacing, setIsPlacing] = useState(false);
+
+  const handleAddMarker = (position: [number, number]) => {
+    setMarkers((prev) => [
+      ...prev,
+      { id: prev.length + 1, position: position },
+    ]);
+  };
 
   // Update viewport height dynamically
   useEffect(() => {
@@ -21,7 +33,14 @@ function App() {
         className='w-full flex items-center justify-center'
       >
         {/* Pass setPosition so MapCenter can update it */}
-        <MapCenter position={position} setPosition={setPosition} />
+        <MapCenter
+          position={position}
+          setPosition={setPosition}
+          markers={markers}
+          isPlacing={isPlacing}
+          setIsPlacing={setIsPlacing}
+          onPlacementConfirm={handleAddMarker}
+        />
         {/* Pass position so AddButton can read it */}
       </div>
     </>
