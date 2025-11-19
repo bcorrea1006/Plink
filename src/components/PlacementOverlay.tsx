@@ -1,7 +1,7 @@
-// PlaxementOverlay.tsx
+// PlacementOverlay.tsx
 // A transparent overlay used during placement mode to add the crosshairs
 
-export default function PlaxementOverlay({
+export default function PlacementOverlay({
   onCancel,
 }: {
   onCancel: () => void;

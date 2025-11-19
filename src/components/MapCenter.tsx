@@ -34,6 +34,8 @@ export default function MapCenter({ position, setPosition }: MapCenterProps) {
   return (
     <div className='h-full w-full relative z-0'>
       <AddButton
+        isPlacing={isPlacing}
+        onCancelPlacement={() => setIsPlacing(false)}
         onStartPlacement={() => setIsPlacing(true)}
         position={position}
       />
