@@ -17,6 +17,9 @@ function App() {
       ...prev,
       { id: prev.length + 1, position: position },
     ]);
+    // Play the Plink!!!
+    const audio = new Audio('/public/sounds/plink-3.mp3');
+    audio.play().catch((err) => console.error('Error Plinking 😢\n', err));
   };
 
   // Update viewport height dynamically
