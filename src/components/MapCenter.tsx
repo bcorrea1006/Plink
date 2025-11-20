@@ -49,14 +49,18 @@ export default function MapCenter({
         isPlacing={isPlacing}
         onTogglePlacement={() => setIsPlacing((prev) => !prev)}
       />
-      {isPlacing && (
-        <PlacementOverlay
-          onCancel={() => setIsPlacing(false)}
-          onConfirm={onPlacementConfirm}
-        />
-      )}
       {position ? (
-        <MapContainer center={position} zoom={13} className='h-full w-full z-0'>
+        <MapContainer
+          center={position}
+          zoom={13}
+          className='h-full w-full z-10'
+        >
+          {isPlacing && (
+            <PlacementOverlay
+              onCancel={() => setIsPlacing(false)}
+              onConfirm={onPlacementConfirm}
+            />
+          )}
           <ResizeOnPlacement isPlacing={isPlacing} />
           <TileLayer
             url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
