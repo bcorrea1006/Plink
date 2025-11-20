@@ -50,9 +50,9 @@ export default function PlacementOverlay({
       {/* Confirm Button */}
       <button
         onClick={handleConfirm}
-        className='absolute bottom-6 right-6 bg-green-500 text-black px-4 py-2 rounded-lg shadow-2xl'
+        className='absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center justify-center bg-green-500 text-2xl text-black hover:text-white font-bold px-6 py-4 rounded-full shadow-2xl z-50 pointer-events-auto hover:bg-green-600'
       >
-        Place Marker
+        ✓
       </button>
     </div>
   );
