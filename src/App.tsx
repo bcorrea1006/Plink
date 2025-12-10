@@ -18,7 +18,8 @@ function App() {
       { id: prev.length + 1, position: position },
     ]);
     // Play the Plink!!!
-    const audio = new Audio('/public/sounds/plink-3.mp3');
+    const whichPlink = Math.floor(Math.random() * 3) + 1;
+    const audio = new Audio(`src/sounds/plink-${whichPlink}.mp3`);
     audio.play().catch((err) => console.error('Error Plinking 😢\n', err));
   };
 
