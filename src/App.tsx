@@ -45,7 +45,6 @@ function App() {
           setIsPlacing={setIsPlacing}
           onPlacementConfirm={handleAddMarker}
         />
-        {/* Pass position so AddButton can read it */}
       </div>
     </>
   );

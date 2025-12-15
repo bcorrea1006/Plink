@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import AddButton from './AddButton';
 import PlacementOverlay from './PlacementOverlay';
+import SidePanel from './SidePanel';
 
 interface MapCenterProps {
   position: [number, number] | null;
@@ -43,6 +44,8 @@ export default function MapCenter({
     }
   }, []);
 
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className='h-full w-full relative z-0'>
       <AddButton
@@ -66,21 +69,23 @@ export default function MapCenter({
             url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
-          {/* Fixing map resizing issues... trying to at least */}
-          {/* <MapResizeFix />{' '} */}
-          {/* <Marker position={position}>
-            <Popup>You are here!</Popup>
-            <RecenterMap position={position} />
-          </Marker> */}
-          <Marker position={[47.66342038920617, -122.32327057882037]}>
-            <Popup>My bedroom lol :D</Popup>
-          </Marker>
           {/* Render Piano Markers dynamically */}
           {markers.map((marker) => (
-            <Marker key={marker.id} position={marker.position}>
-              <Popup>Marker {marker.id}</Popup>
-            </Marker>
+            <Marker
+              key={marker.id}
+              position={marker.position}
+              eventHandlers={{
+                click: () => {
+                  setIsOpen(true);
+                },
+              }}
+            ></Marker>
           ))}
+          <SidePanel
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
+            markerData={markers}
+          ></SidePanel>
         </MapContainer>
       ) : (
         <p className='text-center mt-10'>Fetching location...</p>
