@@ -12,12 +12,12 @@ export default function SidePanel({
   return (
     <div
       className={`
-        fixed top-0 right-0 h-full w-80 bg-white shadow-xl z-1000
+        fixed top-0 right-0 h-full w-80 bg-white text-black shadow-xl z-1000
         transform transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : 'translate-x-full'}
       `}
     >
-      {/* Header */}
+      {/* Close Panel Button */}
       <div className='p-4 border-b flex justify-between items-center'>
         <h2 className='text-lg font-bold'>Piano Details</h2>
         <button onClick={onClose} className='text-gray-500 hover:text-black'>
