@@ -5,23 +5,22 @@ import AddButton from './AddButton';
 import PlacementOverlay from './PlacementOverlay';
 import SidePanel from './SidePanel';
 import PianoForm from './PianoMarkerForm';
+import type { Piano } from '../types/piano';
+import PianoDetails from './PianoDetails';
 
 interface MapCenterProps {
   position: [number, number] | null;
   setPosition: React.Dispatch<React.SetStateAction<[number, number] | null>>;
-
-  markers: { id: number; position: [number, number] }[];
-
+  pianos: Piano[];
   isPlacing: boolean;
   setIsPlacing: React.Dispatch<React.SetStateAction<boolean>>;
-
   onPlacementConfirm: (center: [number, number]) => void;
 }
 
 export default function MapCenter({
   position,
   setPosition,
-  markers,
+  pianos,
   isPlacing,
   setIsPlacing,
   onPlacementConfirm,
@@ -71,10 +70,10 @@ export default function MapCenter({
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
           {/* Render Piano Markers dynamically */}
-          {markers.map((marker) => (
+          {pianos.map((piano) => (
             <Marker
-              key={marker.id}
-              position={marker.position}
+              key={piano.id}
+              position={piano.position}
               eventHandlers={{
                 click: () => {
                   setIsOpen(true);
@@ -82,14 +81,14 @@ export default function MapCenter({
               }}
             >
               <Popup>
-                <PianoForm />
+                <PianoDetails piano={piano} />
               </Popup>
             </Marker>
           ))}
           <SidePanel
             isOpen={isOpen}
             onClose={() => setIsOpen(false)}
-            markerData={markers}
+            markerData={pianos}
           ></SidePanel>
         </MapContainer>
       ) : (

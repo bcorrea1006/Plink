@@ -2,22 +2,30 @@ import { use, useState, useEffect } from 'react';
 import 'leaflet/dist/leaflet.css';
 import AddButton from './components/AddButton';
 import MapCenter from './components/MapCenter';
+import type { Piano } from './types/piano';
 
 function App() {
-  const [position, setPosition] = useState<[number, number] | null>(null);
+  const [position, setPosition] = useState<[number, number] | null>(null); // The user's current position
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
-  const [markers, setMarkers] = useState<
-    { id: number; position: [number, number] }[]
-  >([]);
-
   const [isPlacing, setIsPlacing] = useState(false);
 
-  const handleAddMarker = (position: [number, number]) => {
-    setMarkers((prev) => [
-      ...prev,
-      { id: prev.length + 1, position: position },
-    ]);
-    // Play the Plink!!!
+  // Piano adding logic
+  const [pianos, setPianos] = useState<Piano[]>([]);
+
+  const addPiano = (position: [number, number]) => {
+    const newPiano: Piano = {
+      id: crypto.randomUUID(),
+      position,
+      quality: 3,
+      tuned: false,
+      access: 'private',
+    };
+
+    setPianos((prev) => [...prev, newPiano]);
+    playPlink(); // Play the Plink sound!
+  };
+
+  const playPlink = () => {
     const whichPlink = Math.floor(Math.random() * 3) + 1;
     const audio = new Audio(`src/sounds/plink-${whichPlink}.mp3`);
     audio.play().catch((err) => console.error('Error Plinking 😢\n', err));
@@ -40,10 +48,10 @@ function App() {
         <MapCenter
           position={position}
           setPosition={setPosition}
-          markers={markers}
+          pianos={pianos}
           isPlacing={isPlacing}
           setIsPlacing={setIsPlacing}
-          onPlacementConfirm={handleAddMarker}
+          onPlacementConfirm={addPiano}
         />
       </div>
     </>
