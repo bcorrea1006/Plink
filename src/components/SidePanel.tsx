@@ -1,3 +1,5 @@
+import PianoMarkerForm from './PianoMarkerForm';
+
 type SidePanelProps = {
   isOpen: boolean;
   onClose: () => void;
@@ -24,24 +26,9 @@ export default function SidePanel({
           ✕
         </button>
       </div>
-
       {/* Content */}
       <div className='p-4'>
-        {markerData ? (
-          <div className='space-y-2'>
-            <p>
-              <strong>Quality:</strong> {markerData.quality}
-            </p>
-            <p>
-              <strong>Tuned:</strong> {markerData.tuned ? 'Yes' : 'No'}
-            </p>
-            <p>
-              <strong>Access:</strong> {markerData.access}
-            </p>
-          </div>
-        ) : (
-          <p className='text-gray-500'>No marker selected</p>
-        )}
+        <PianoMarkerForm />
       </div>
     </div>
   );

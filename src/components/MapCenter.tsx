@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import AddButton from './AddButton';
 import PlacementOverlay from './PlacementOverlay';
 import SidePanel from './SidePanel';
+import PianoForm from './PianoMarkerForm';
 
 interface MapCenterProps {
   position: [number, number] | null;
@@ -79,7 +80,11 @@ export default function MapCenter({
                   setIsOpen(true);
                 },
               }}
-            ></Marker>
+            >
+              <Popup>
+                <PianoForm />
+              </Popup>
+            </Marker>
           ))}
           <SidePanel
             isOpen={isOpen}
