@@ -3,11 +3,13 @@ import 'leaflet/dist/leaflet.css';
 import AddButton from './components/AddButton';
 import MapCenter from './components/MapCenter';
 import type { Piano } from './types/piano';
+import ThemeToggle from './components/ThemeToggle';
 
 function App() {
   const [position, setPosition] = useState<[number, number] | null>(null); // The user's current position
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
   const [isPlacing, setIsPlacing] = useState(false);
+  const [isLight, setIsLight] = useState(true);
 
   // Piano adding logic
   const [pianos, setPianos] = useState<Piano[]>([]);
@@ -44,6 +46,12 @@ function App() {
         style={{ height: `${viewportHeight}px` }}
         className='w-full flex items-center justify-center'
       >
+        <div className='absolute top-25 left-1.5 z-[1000]'>
+          <ThemeToggle
+            isLight={isLight}
+            onToggle={() => setIsLight((prev) => !prev)}
+          />
+        </div>
         {/* Pass setPosition so MapCenter can update it */}
         <MapCenter
           position={position}
