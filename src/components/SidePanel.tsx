@@ -1,16 +1,13 @@
 import PianoMarkerForm from './PianoMarkerForm';
+import type { Piano } from '../types/piano';
 
 type SidePanelProps = {
   isOpen: boolean;
   onClose: () => void;
-  markerData: any | null;
+  piano: Piano | null;
 };
 
-export default function SidePanel({
-  isOpen,
-  onClose,
-  markerData,
-}: SidePanelProps) {
+export default function SidePanel({ isOpen, onClose, piano }: SidePanelProps) {
   return (
     <div
       className={`
@@ -18,6 +15,7 @@ export default function SidePanel({
         transform transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : 'translate-x-full'}
       `}
+      onClick={(e) => e.stopPropagation()}
     >
       {/* Close Panel Button */}
       <div className='p-4 border-b flex justify-between items-center'>

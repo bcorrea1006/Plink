@@ -45,6 +45,7 @@ export default function MapCenter({
   }, []);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedPiano, setSelectedPiano] = useState<Piano | null>(null);
 
   return (
     <div className='h-full w-full relative z-0'>
@@ -71,24 +72,37 @@ export default function MapCenter({
           />
           {/* Render Piano Markers dynamically */}
           {pianos.map((piano) => (
-            <Marker
-              key={piano.id}
-              position={piano.position}
-              eventHandlers={{
-                click: () => {
-                  setIsOpen(true);
-                },
-              }}
-            >
-              <Popup>
+            <Marker key={piano.id} position={piano.position}>
+              <Popup
+                autoClose={false}
+                closeOnClick={false}
+                eventHandlers={{
+                  remove: () => {
+                    setIsOpen(false);
+                    setSelectedPiano(null); // no piano currently selected
+                  },
+                }}
+              >
                 <PianoDetails piano={piano} />
+                <button
+                  className='w-1/2 bg-blue-500 text-white font-medium py-2 rounded hover:bg-blue-600 transition'
+                  onClick={() => {
+                    setIsOpen(true);
+                    setSelectedPiano(piano);
+                  }}
+                >
+                  Edit
+                </button>
               </Popup>
             </Marker>
           ))}
           <SidePanel
             isOpen={isOpen}
-            onClose={() => setIsOpen(false)}
-            markerData={pianos}
+            onClose={() => {
+              setIsOpen(false);
+              setSelectedPiano(null);
+            }}
+            piano={selectedPiano}
           ></SidePanel>
         </MapContainer>
       ) : (
