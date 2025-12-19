@@ -63,7 +63,6 @@ function App() {
           isPlacing={isPlacing}
           setIsPlacing={setIsPlacing}
           onPlacementConfirm={addPiano}
-          isLight={isLight}
         />
       </div>
     </ThemeContext.Provider>

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import AddButton from './AddButton';
 import PlacementOverlay from './PlacementOverlay';
@@ -84,21 +84,36 @@ export default function MapCenter({
           />
           {/* Render Piano Markers dynamically */}
           {pianos.map((piano) => (
-            <Marker
-              key={piano.id}
-              position={piano.position}
-              eventHandlers={{ click: () => setSelectedPiano(piano) }}
-            />
+            <Marker key={piano.id} position={piano.position}>
+              <Popup
+                key={isLight ? 'light' : 'dark'} // Literally only used to destroy the Popup on theme changes
+                className={
+                  isLight ? 'leaflet-popup-light' : 'leaflet-popup-dark'
+                }
+                autoClose={false}
+                closeOnClick={false}
+                eventHandlers={{
+                  remove: () => {
+                    setIsOpen(false);
+                    setSelectedPiano(null); // no piano currently selected
+                  },
+                }}
+              >
+                <div>
+                  <PianoDetails piano={piano} />
+                  <button
+                    className='w-1/2 bg-blue-500 text-white font-medium py-2 rounded hover:bg-blue-600 transition'
+                    onClick={() => {
+                      setIsOpen(true);
+                      setSelectedPiano(piano);
+                    }}
+                  >
+                    Edit
+                  </button>
+                </div>
+              </Popup>
+            </Marker>
           ))}
-          {/* Only render the custom popup if a piano is selected */}
-          {selectedPiano && (
-            <CustomPopup
-              piano={selectedPiano}
-              isLight={isLight}
-              setIsOpen={setIsOpen}
-              setSelectedPiano={setSelectedPiano}
-            />
-          )}
           <SidePanel
             isOpen={isOpen}
             onClose={() => {
