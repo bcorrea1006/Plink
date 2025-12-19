@@ -8,7 +8,9 @@ export default function PianoDetails({ piano }: PianoDetailsProps) {
   const { isLight, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <div className={isLight ? 'bg-white text-black' : 'bg-gray-900 text-white'}>
+    <div
+      className={isLight ? 'bg-white text-black' : 'bg-[#2c2c2c] text-white'}
+    >
       <p>
         <strong>id: </strong>
         {piano.id}

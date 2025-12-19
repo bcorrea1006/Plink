@@ -20,7 +20,7 @@ export default function SidePanel({
         fixed top-0 right-0 h-full w-80 shadow-xl z-1000
         transform transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : 'translate-x-full'}
-        ${isLight ? 'bg-white text-black' : 'bg-gray-900 text-white'}
+        ${isLight ? 'bg-white text-black' : 'bg-[#2c2c2c] text-white'}
       `}
       onClick={(e) => e.stopPropagation()}
     >

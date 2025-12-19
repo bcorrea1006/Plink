@@ -1,6 +1,5 @@
-import { use, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import 'leaflet/dist/leaflet.css';
-import AddButton from './components/AddButton';
 import MapCenter from './components/MapCenter';
 import type { Piano } from './types/piano';
 import ThemeToggle from './components/ThemeToggle';
@@ -47,7 +46,9 @@ function App() {
     <ThemeContext.Provider value={{ isLight, toggleTheme }}>
       <div
         style={{ height: `${viewportHeight}px` }}
-        className='w-full flex items-center justify-center'
+        className={`w-full flex items-center justify-center ${
+          isLight ? 'light-theme' : 'dark-theme'
+        }`}
       >
         <div className='absolute top-25 left-1.5 z-[1000]'>
           <ThemeToggle
@@ -55,7 +56,6 @@ function App() {
             onToggle={() => setIsLight((prev) => !prev)}
           />
         </div>
-        {/* Pass setPosition so MapCenter can update it */}
         <MapCenter
           position={position}
           setPosition={setPosition}

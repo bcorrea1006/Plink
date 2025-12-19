@@ -86,10 +86,6 @@ export default function MapCenter({
           {pianos.map((piano) => (
             <Marker key={piano.id} position={piano.position}>
               <Popup
-                key={isLight ? 'light' : 'dark'} // Literally only used to destroy the Popup on theme changes
-                className={
-                  isLight ? 'leaflet-popup-light' : 'leaflet-popup-dark'
-                }
                 autoClose={false}
                 closeOnClick={false}
                 eventHandlers={{
@@ -129,44 +125,6 @@ export default function MapCenter({
       )}
     </div>
   );
-}
-
-// CustomPopup so it responds to the theme dynamically
-function CustomPopup({
-  piano,
-  isLight,
-  setIsOpen,
-  setSelectedPiano,
-}: CustomPopupProps) {
-  const map = useMap();
-
-  const point = map.latLngToContainerPoint(piano.position);
-
-  return (
-    <div
-      className={`absolute z-50 p-2 rounded shadow-lg z-[1000] ${
-        isLight ? 'bg-white text-black' : 'bg-gray-900 text-white'
-      }`}
-      style={{
-        transform: `translate(${point.x}px, ${point.y}px)`,
-      }}
-    >
-      <PianoDetails piano={piano} />
-      <button onClick={() => setIsOpen(true)}>Edit</button>
-      <button onClick={() => setSelectedPiano(null)}>✕</button>
-    </div>
-  );
-}
-
-// Forces Leaflet to recalc size whenever the position changes
-function RecenterMap({ position }: { position: [number, number] }) {
-  const map = useMap();
-  useEffect(() => {
-    map.invalidateSize(); // Fix container sizing
-    map.setView(position);
-  }, [position, map]);
-
-  return null;
 }
 
 function ResizeOnPlacement({ isPlacing }: { isPlacing: boolean }) {

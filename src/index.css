@@ -1,21 +1,25 @@
 @import 'tailwindcss';
 
-/* Dark popup */
-.leaflet-popup-dark .leaflet-popup-content-wrapper {
-  @apply bg-gray-900 text-white; /* Tailwind classes */
+/* Define theme-specific variables on the container */
+.light-theme {
+  --popup-bg: #ffffff;
+  --popup-text: #333333;
 }
 
-.leaflet-popup-dark .leaflet-popup-tip {
-  @apply bg-gray-900;
+.dark-theme {
+  --popup-bg: #2c2c2c;
+  --popup-text: #f0f0f0;
 }
 
-/* Light popup (optional, Leaflet default is fine) */
-.leaflet-popup-light .leaflet-popup-content-wrapper {
-  @apply bg-white text-black;
+/* Force Leaflet's internal classes to use these variables */
+/* No re-render required for these to update! */
+.leaflet-popup-content-wrapper {
+  background-color: var(--popup-bg) !important;
+  color: var(--popup-text) !important;
 }
 
-.leaflet-popup-light .leaflet-popup-tip {
-  @apply bg-white;
+.leaflet-popup-tip {
+  background-color: var(--popup-bg) !important;
 }
 
 html, body, #root {
