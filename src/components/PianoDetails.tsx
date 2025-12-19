@@ -5,7 +5,7 @@ import type { Piano } from '../types/piano';
 type PianoDetailsProps = { piano: Piano };
 
 export default function PianoDetails({ piano }: PianoDetailsProps) {
-  const { isLight, toggleTheme } = useContext(ThemeContext);
+  const { isLight } = useContext(ThemeContext);
 
   return (
     <div

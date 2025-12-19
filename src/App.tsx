@@ -50,7 +50,7 @@ function App() {
           isLight ? 'light-theme' : 'dark-theme'
         }`}
       >
-        <div className='absolute top-25 left-1.5 z-[1000]'>
+        <div className='absolute top-25 left-1.5 z-1000'>
           <ThemeToggle
             isLight={isLight}
             onToggle={() => setIsLight((prev) => !prev)}

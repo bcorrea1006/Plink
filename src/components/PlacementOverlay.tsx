@@ -21,7 +21,7 @@ export default function PlacementOverlay({
   };
 
   return (
-    <div className='absolute inset-0 z-[10000] pointer-events-none'>
+    <div className='absolute inset-0 z-10000 pointer-events-none'>
       {/* slight dim effect apparently */}
       <div className='absolute inset-0 bg-black/20 pointer-events-none' />
 

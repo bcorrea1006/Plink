@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import type { Piano } from '../types/piano';
+import { ThemeContext } from './context/ThemeContext';
 
 type PianoMarker = {
   quality: number; // 1 - 5 stars
@@ -6,7 +8,11 @@ type PianoMarker = {
   access: 'public' | 'private' | 'restricted';
 };
 
-export default function PianoForm() {
+type PianoMarkerFormProps = {
+  piano: Piano;
+};
+
+export default function PianoMarkerForm({ piano }: PianoMarkerFormProps) {
   const [marker, setMarker] = useState<PianoMarker>({
     quality: 0,
     tuned: false,
@@ -31,18 +37,21 @@ export default function PianoForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Saved marker:', marker);
+    alert(`Submitted piano: ${piano.id}`);
   };
+
+  const { isLight } = useContext(ThemeContext);
 
   return (
     <form
       onSubmit={handleSubmit}
-      className='max-w-md mx-auto p-6 bg-white rounded-xl shadow-md space-y-4'
+      className={`max-w-md mx-auto p-6 rounded-xl space-y-4 ${
+        isLight ? 'bg-white text-black' : 'bg-[#2c2c2c] text-white'
+      }`}
     >
       {/* Star Rating */}
       <div>
-        <label className='block text-gray-700 font-medium mb-1'>
-          Piano Quality
-        </label>
+        <label className='block font-medium mb-1'>Piano Quality</label>
         <div className='flex space-x-1'>
           {[1, 2, 3, 4, 5].map((star) => (
             <button
@@ -68,14 +77,12 @@ export default function PianoForm() {
           onChange={handleChange}
           className='h-4 w-4 text-blue-600 border-gray-300 rounded'
         />
-        <label className='text-gray-700 font-medium'>Tuned?</label>
+        <label className='font-medium'>Tuned?</label>
       </div>
 
       {/* Acces Select */}
       <div>
-        <label className='block text-gray-700 font-medium mb-1'>
-          Access Permissions
-        </label>
+        <label className='block font-medium mb-1'>Access Permissions</label>
         <select
           name='access'
           value={marker.access}

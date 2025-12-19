@@ -25,16 +25,14 @@ export default function SidePanel({
       onClick={(e) => e.stopPropagation()}
     >
       {/* Close Panel Button */}
-      <div className='p-4 border-b flex justify-between items-center'>
+      <div className='p-4 border-b flex justify-between items-baseline'>
         <h2 className='text-lg font-bold'>Piano Details</h2>
         <button onClick={onClose} className='text-gray-500 hover:text-black'>
           ✕
         </button>
       </div>
-      {/* Content */}
-      <div className='p-4'>
-        <PianoMarkerForm />
-      </div>
+      {/* Conditionally render the content if a piano is selected */}
+      <div className='p-4'>{piano && <PianoMarkerForm piano={piano} />}</div>
     </div>
   );
 }

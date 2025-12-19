@@ -17,13 +17,6 @@ interface MapCenterProps {
   onPlacementConfirm: (center: [number, number]) => void;
 }
 
-interface CustomPopupProps {
-  piano: Piano;
-  isLight: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectedPiano: React.Dispatch<React.SetStateAction<Piano | null>>;
-}
-
 export default function MapCenter({
   position,
   setPosition,
@@ -53,7 +46,7 @@ export default function MapCenter({
 
   const [selectedPiano, setSelectedPiano] = useState<Piano | null>(null);
   const [isOpen, setIsOpen] = useState(false);
-  const { isLight, toggleTheme } = useContext(ThemeContext);
+  const { isLight } = useContext(ThemeContext);
 
   return (
     <div className='h-full w-full relative z-0'>
