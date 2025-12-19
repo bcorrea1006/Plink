@@ -1,5 +1,23 @@
 @import 'tailwindcss';
 
+/* Dark popup */
+.leaflet-popup-dark .leaflet-popup-content-wrapper {
+  @apply bg-gray-900 text-white; /* Tailwind classes */
+}
+
+.leaflet-popup-dark .leaflet-popup-tip {
+  @apply bg-gray-900;
+}
+
+/* Light popup (optional, Leaflet default is fine) */
+.leaflet-popup-light .leaflet-popup-content-wrapper {
+  @apply bg-white text-black;
+}
+
+.leaflet-popup-light .leaflet-popup-tip {
+  @apply bg-white;
+}
+
 html, body, #root {
   height: 100%;
   width: 100%;

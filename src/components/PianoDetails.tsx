@@ -1,10 +1,14 @@
+import { useContext } from 'react';
+import { ThemeContext } from './context/ThemeContext';
 import type { Piano } from '../types/piano';
 
 type PianoDetailsProps = { piano: Piano };
 
 export default function PianoDetails({ piano }: PianoDetailsProps) {
+  const { isLight, toggleTheme } = useContext(ThemeContext);
+
   return (
-    <div>
+    <div className={isLight ? 'bg-white text-black' : 'bg-gray-900 text-white'}>
       <p>
         <strong>id: </strong>
         {piano.id}

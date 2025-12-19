@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { useContext, useEffect, useState } from 'react';
+import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import AddButton from './AddButton';
 import PlacementOverlay from './PlacementOverlay';
 import SidePanel from './SidePanel';
-import PianoForm from './PianoMarkerForm';
 import type { Piano } from '../types/piano';
 import PianoDetails from './PianoDetails';
+import { ThemeContext } from './context/ThemeContext';
 
 interface MapCenterProps {
   position: [number, number] | null;
@@ -15,6 +15,13 @@ interface MapCenterProps {
   isPlacing: boolean;
   setIsPlacing: React.Dispatch<React.SetStateAction<boolean>>;
   onPlacementConfirm: (center: [number, number]) => void;
+}
+
+interface CustomPopupProps {
+  piano: Piano;
+  isLight: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedPiano: React.Dispatch<React.SetStateAction<Piano | null>>;
 }
 
 export default function MapCenter({
@@ -44,8 +51,9 @@ export default function MapCenter({
     }
   }, []);
 
-  const [isOpen, setIsOpen] = useState(false);
   const [selectedPiano, setSelectedPiano] = useState<Piano | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const { isLight, toggleTheme } = useContext(ThemeContext);
 
   return (
     <div className='h-full w-full relative z-0'>
@@ -67,35 +75,30 @@ export default function MapCenter({
           )}
           <ResizeOnPlacement isPlacing={isPlacing} />
           <TileLayer
-            url='https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+            url={
+              isLight
+                ? 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                : `https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png`
+            }
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
           {/* Render Piano Markers dynamically */}
           {pianos.map((piano) => (
-            <Marker key={piano.id} position={piano.position}>
-              <Popup
-                autoClose={false}
-                closeOnClick={false}
-                eventHandlers={{
-                  remove: () => {
-                    setIsOpen(false);
-                    setSelectedPiano(null); // no piano currently selected
-                  },
-                }}
-              >
-                <PianoDetails piano={piano} />
-                <button
-                  className='w-1/2 bg-blue-500 text-white font-medium py-2 rounded hover:bg-blue-600 transition'
-                  onClick={() => {
-                    setIsOpen(true);
-                    setSelectedPiano(piano);
-                  }}
-                >
-                  Edit
-                </button>
-              </Popup>
-            </Marker>
+            <Marker
+              key={piano.id}
+              position={piano.position}
+              eventHandlers={{ click: () => setSelectedPiano(piano) }}
+            />
           ))}
+          {/* Only render the custom popup if a piano is selected */}
+          {selectedPiano && (
+            <CustomPopup
+              piano={selectedPiano}
+              isLight={isLight}
+              setIsOpen={setIsOpen}
+              setSelectedPiano={setSelectedPiano}
+            />
+          )}
           <SidePanel
             isOpen={isOpen}
             onClose={() => {
@@ -103,11 +106,39 @@ export default function MapCenter({
               setSelectedPiano(null);
             }}
             piano={selectedPiano}
+            isLight={isLight}
           ></SidePanel>
         </MapContainer>
       ) : (
         <p className='text-center mt-10'>Fetching location...</p>
       )}
+    </div>
+  );
+}
+
+// CustomPopup so it responds to the theme dynamically
+function CustomPopup({
+  piano,
+  isLight,
+  setIsOpen,
+  setSelectedPiano,
+}: CustomPopupProps) {
+  const map = useMap();
+
+  const point = map.latLngToContainerPoint(piano.position);
+
+  return (
+    <div
+      className={`absolute z-50 p-2 rounded shadow-lg z-[1000] ${
+        isLight ? 'bg-white text-black' : 'bg-gray-900 text-white'
+      }`}
+      style={{
+        transform: `translate(${point.x}px, ${point.y}px)`,
+      }}
+    >
+      <PianoDetails piano={piano} />
+      <button onClick={() => setIsOpen(true)}>Edit</button>
+      <button onClick={() => setSelectedPiano(null)}>✕</button>
     </div>
   );
 }

@@ -4,12 +4,15 @@ import AddButton from './components/AddButton';
 import MapCenter from './components/MapCenter';
 import type { Piano } from './types/piano';
 import ThemeToggle from './components/ThemeToggle';
+import { ThemeContext } from './components/context/ThemeContext';
 
 function App() {
   const [position, setPosition] = useState<[number, number] | null>(null); // The user's current position
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
   const [isPlacing, setIsPlacing] = useState(false);
   const [isLight, setIsLight] = useState(true);
+
+  const toggleTheme = () => setIsLight((prev) => !prev);
 
   // Piano adding logic
   const [pianos, setPianos] = useState<Piano[]>([]);
@@ -41,7 +44,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <ThemeContext.Provider value={{ isLight, toggleTheme }}>
       <div
         style={{ height: `${viewportHeight}px` }}
         className='w-full flex items-center justify-center'
@@ -60,9 +63,10 @@ function App() {
           isPlacing={isPlacing}
           setIsPlacing={setIsPlacing}
           onPlacementConfirm={addPiano}
+          isLight={isLight}
         />
       </div>
-    </>
+    </ThemeContext.Provider>
   );
 }
 
