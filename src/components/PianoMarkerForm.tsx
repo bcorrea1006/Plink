@@ -1,6 +1,7 @@
+import { useEffect } from 'react';
 import { useContext, useState } from 'react';
-import type { Piano } from '../types/piano';
 import { ThemeContext } from './context/ThemeContext';
+import type { Piano } from '../types/piano';
 
 type PianoMarker = {
   quality: number; // 1 - 5 stars
@@ -24,6 +25,17 @@ export default function PianoMarkerForm({
     access: piano.access,
     notes: piano.notes,
   });
+
+  useEffect(() => {
+    if (piano) {
+      setMarker({
+        quality: piano.quality,
+        tuned: piano.tuned,
+        access: piano.access,
+        notes: piano.notes || '',
+      });
+    }
+  }, [piano]);
 
   const handleStarClick = (star: number) => {
     setMarker((prev) => ({ ...prev, quality: star }));
