@@ -5,6 +5,7 @@ type SidePanelProps = {
   isOpen: boolean;
   onClose: () => void;
   piano: Piano | null;
+  onUpdate: (updated: Piano) => void;
   isLight: boolean;
 };
 
@@ -12,6 +13,7 @@ export default function SidePanel({
   isOpen,
   onClose,
   piano,
+  onUpdate,
   isLight,
 }: SidePanelProps) {
   return (
@@ -32,7 +34,9 @@ export default function SidePanel({
         </button>
       </div>
       {/* Conditionally render the content if a piano is selected */}
-      <div className='p-4'>{piano && <PianoMarkerForm piano={piano} />}</div>
+      <div className='p-4'>
+        {piano && <PianoMarkerForm piano={piano} onUpdate={onUpdate} />}
+      </div>
     </div>
   );
 }

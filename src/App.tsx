@@ -13,8 +13,15 @@ function App() {
 
   const toggleTheme = () => setIsLight((prev) => !prev);
 
-  // Piano adding logic
+  // Piano state logic
   const [pianos, setPianos] = useState<Piano[]>([]);
+  const [selectedPiano, setSelectedPiano] = useState<Piano | null>(null);
+
+  const updatePiano = (updated: Piano) => {
+    setPianos((prev) =>
+      prev.map((p) => (p.id === updated.id ? { ...p, ...updated } : p))
+    );
+  };
 
   const addPiano = (position: [number, number]) => {
     const newPiano: Piano = {
@@ -60,6 +67,9 @@ function App() {
           position={position}
           setPosition={setPosition}
           pianos={pianos}
+          selectedPiano={selectedPiano}
+          onSelectPiano={setSelectedPiano}
+          onUpdatePiano={updatePiano}
           isPlacing={isPlacing}
           setIsPlacing={setIsPlacing}
           onPlacementConfirm={addPiano}

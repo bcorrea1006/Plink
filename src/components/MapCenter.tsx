@@ -1,17 +1,20 @@
+import 'leaflet/dist/leaflet.css';
 import { useContext, useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
+import { ThemeContext } from './context/ThemeContext';
+import type { Piano } from '../types/piano';
 import AddButton from './AddButton';
 import PlacementOverlay from './PlacementOverlay';
 import SidePanel from './SidePanel';
-import type { Piano } from '../types/piano';
 import PianoDetails from './PianoDetails';
-import { ThemeContext } from './context/ThemeContext';
 
 interface MapCenterProps {
   position: [number, number] | null;
   setPosition: React.Dispatch<React.SetStateAction<[number, number] | null>>;
   pianos: Piano[];
+  selectedPiano: Piano | null;
+  onSelectPiano: React.Dispatch<React.SetStateAction<Piano | null>>;
+  onUpdatePiano: (updated: Piano) => void;
   isPlacing: boolean;
   setIsPlacing: React.Dispatch<React.SetStateAction<boolean>>;
   onPlacementConfirm: (center: [number, number]) => void;
@@ -21,6 +24,9 @@ export default function MapCenter({
   position,
   setPosition,
   pianos,
+  selectedPiano,
+  onSelectPiano,
+  onUpdatePiano,
   isPlacing,
   setIsPlacing,
   onPlacementConfirm,
@@ -43,8 +49,6 @@ export default function MapCenter({
       setPosition([47.6061, -122.3328]); // Default to Seattle
     }
   }, []);
-
-  const [selectedPiano, setSelectedPiano] = useState<Piano | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const { isLight } = useContext(ThemeContext);
 
@@ -84,7 +88,7 @@ export default function MapCenter({
                 eventHandlers={{
                   remove: () => {
                     setIsOpen(false);
-                    setSelectedPiano(null); // no piano currently selected
+                    onSelectPiano(null); // no piano currently selected
                   },
                 }}
               >
@@ -94,7 +98,7 @@ export default function MapCenter({
                     className='w-1/2 bg-blue-500 text-white font-medium py-2 rounded hover:bg-blue-600 transition'
                     onClick={() => {
                       setIsOpen(true);
-                      setSelectedPiano(piano);
+                      onSelectPiano(piano);
                     }}
                   >
                     Edit
@@ -107,9 +111,10 @@ export default function MapCenter({
             isOpen={isOpen}
             onClose={() => {
               setIsOpen(false);
-              setSelectedPiano(null);
+              onSelectPiano(null);
             }}
             piano={selectedPiano}
+            onUpdate={onUpdatePiano}
             isLight={isLight}
           ></SidePanel>
         </MapContainer>

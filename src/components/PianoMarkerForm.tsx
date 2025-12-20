@@ -6,17 +6,23 @@ type PianoMarker = {
   quality: number; // 1 - 5 stars
   tuned: boolean;
   access: 'public' | 'private' | 'restricted';
+  notes?: string;
 };
 
 type PianoMarkerFormProps = {
   piano: Piano;
+  onUpdate: (updateMarker: Piano) => void;
 };
 
-export default function PianoMarkerForm({ piano }: PianoMarkerFormProps) {
+export default function PianoMarkerForm({
+  piano,
+  onUpdate,
+}: PianoMarkerFormProps) {
   const [marker, setMarker] = useState<PianoMarker>({
-    quality: 0,
-    tuned: false,
-    access: 'public',
+    quality: piano.quality,
+    tuned: piano.tuned,
+    access: piano.access,
+    notes: piano.notes,
   });
 
   const handleStarClick = (star: number) => {
@@ -36,8 +42,11 @@ export default function PianoMarkerForm({ piano }: PianoMarkerFormProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Saved marker:', marker);
-    alert(`Submitted piano: ${piano.id}`);
+    const updatedPiano: Piano = {
+      ...piano,
+      ...marker,
+    };
+    onUpdate(updatedPiano);
   };
 
   const { isLight } = useContext(ThemeContext);
@@ -58,7 +67,7 @@ export default function PianoMarkerForm({ piano }: PianoMarkerFormProps) {
               key={star}
               type='button'
               onClick={() => handleStarClick(star)}
-              className={`text-2xl ${
+              className={`text-5xl ${
                 marker.quality >= star ? 'text-yellow-400' : 'text-gray-300'
               } hover:text-yellow-500 transition`}
             >
