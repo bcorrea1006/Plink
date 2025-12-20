@@ -20,8 +20,8 @@ export default function PianoDetails({ piano }: PianoDetailsProps) {
         {piano.quality}
       </p>
       <p>
-        <strong>tuned: </strong>
-        {piano.tuned}
+        <strong>tuned:</strong>
+        {piano.tuned ? ' YEAH!!' : ' naaah'}
       </p>
       <p>
         <strong>access: </strong>

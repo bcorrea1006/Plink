@@ -30,7 +30,9 @@ export default function PianoMarkerForm({
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     const target = e.target as HTMLInputElement; // e.target normally types as EventTarget, which is too generic for the "checked" property.
     const { name, value, type, checked } = target;
@@ -102,6 +104,28 @@ export default function PianoMarkerForm({
           <option value='private'>Private</option>
           <option value='restricted'>Restricted</option>
         </select>
+      </div>
+
+      {/* Notes input box */}
+      <div>
+        <label className='block font-medium mb-1'>Notes</label>
+        <textarea
+          name='notes'
+          maxLength={120} // 120 chars max length
+          value={marker.notes || ''} // Keep input controlled
+          onChange={handleChange}
+          placeholder='Add notes about this piano...'
+          rows={1}
+          className='w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition duration-150 placeholder-gray-400 resize-none overflow-hidden'
+          onInput={(e) => {
+            const target = e.target as HTMLTextAreaElement;
+            target.style.height = 'auto'; // reset height
+            target.style.height = `${target.scrollHeight}px`; // grow to fit content
+          }}
+        />
+        <p className='text-sm text-gray-500 mt-1'>
+          {marker.notes?.length || 0}/120 characters
+        </p>
       </div>
 
       <button
