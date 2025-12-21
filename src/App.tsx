@@ -11,12 +11,14 @@ function App() {
   const [isPlacing, setIsPlacing] = useState(false);
   const [isLight, setIsLight] = useState(true);
 
+  // Theme controls
   const toggleTheme = () => setIsLight((prev) => !prev);
 
   // Piano state logic
   const [pianos, setPianos] = useState<Piano[]>([]);
   const [selectedPiano, setSelectedPiano] = useState<Piano | null>(null);
 
+  // Called by PianoMarkerForm
   const updatePiano = (updated: Piano) => {
     setPianos((prev) =>
       prev.map((p) => (p.id === updated.id ? { ...p, ...updated } : p))
