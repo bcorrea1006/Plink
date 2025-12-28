@@ -20,6 +20,8 @@ interface MapCenterProps {
   onPlacementConfirm: (center: [number, number]) => void;
 }
 
+// Adding a random comment just to show my dad the workflow!!
+
 export default function MapCenter({
   position,
   setPosition,
