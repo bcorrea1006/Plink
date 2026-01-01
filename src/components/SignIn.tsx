@@ -1,29 +1,29 @@
 import { useEffect } from 'react';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
+import { auth } from '../firebase/firebase';
 import * as firebaseui from 'firebaseui';
 import 'firebaseui/dist/firebaseui.css';
 
 const SignIn: React.FC = () => {
   useEffect(() => {
     const ui =
-      firebaseui.auth.AuthUI.getInstance() ||
-      new firebaseui.auth.AuthUI(firebase.auth());
+      firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(auth);
 
     const uiConfig = {
-      signInSuccessURL: '/', // where to redirect after login
+      signInSuccessURL: '/',
       signInOptions: [
-        firebase.auth.EmailAuthProvider.PROVIDER_ID,
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        // This is the way
+        {
+          provider: firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
+        },
       ],
-      tosURL: '/terms',
-      privacyPolicyURL: '/privacy',
     };
 
-    ui.start('firebaseui-auth-container', uiConfig);
+    ui.start('#firebaseui-auth-container', uiConfig);
+
+    return () => ui.reset();
   }, []);
 
-  return <div id='firebase-auth-container'></div>;
+  return <div id='firebaseui-auth-container'></div>;
 };
 
 export default SignIn;

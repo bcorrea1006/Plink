@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
-import 'leaflet/dist/leaflet.css';
-import MapCenter from './components/MapCenter';
 import type { Piano } from './types/piano';
-import ThemeToggle from './components/ThemeToggle';
+import { Route, Routes } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { ThemeContext } from './components/context/ThemeContext';
+import MapCenter from './components/MapCenter';
+import ThemeToggle from './components/ThemeToggle';
+import SignIn from './components/SignIn';
+import 'leaflet/dist/leaflet.css';
 
 function App() {
   const [position, setPosition] = useState<[number, number] | null>(null); // The user's current position
@@ -52,32 +54,37 @@ function App() {
   }, []);
 
   return (
-    <ThemeContext.Provider value={{ isLight, toggleTheme }}>
-      <div
-        style={{ height: `${viewportHeight}px` }}
-        className={`w-full flex items-center justify-center ${
-          isLight ? 'light-theme' : 'dark-theme'
-        }`}
-      >
-        <div className='absolute top-25 left-1.5 z-1000'>
-          <ThemeToggle
-            isLight={isLight}
-            onToggle={() => setIsLight((prev) => !prev)}
+    <>
+      <Routes>
+        <Route path='/signin' element={<SignIn />} />
+      </Routes>
+      <ThemeContext.Provider value={{ isLight, toggleTheme }}>
+        <div
+          style={{ height: `${viewportHeight}px` }}
+          className={`w-full flex items-center justify-center ${
+            isLight ? 'light-theme' : 'dark-theme'
+          }`}
+        >
+          <div className='absolute top-25 left-1.5 z-1000'>
+            <ThemeToggle
+              isLight={isLight}
+              onToggle={() => setIsLight((prev) => !prev)}
+            />
+          </div>
+          <MapCenter
+            position={position}
+            setPosition={setPosition}
+            pianos={pianos}
+            selectedPiano={selectedPiano}
+            onSelectPiano={setSelectedPiano}
+            onUpdatePiano={updatePiano}
+            isPlacing={isPlacing}
+            setIsPlacing={setIsPlacing}
+            onPlacementConfirm={addPiano}
           />
         </div>
-        <MapCenter
-          position={position}
-          setPosition={setPosition}
-          pianos={pianos}
-          selectedPiano={selectedPiano}
-          onSelectPiano={setSelectedPiano}
-          onUpdatePiano={updatePiano}
-          isPlacing={isPlacing}
-          setIsPlacing={setIsPlacing}
-          onPlacementConfirm={addPiano}
-        />
-      </div>
-    </ThemeContext.Provider>
+      </ThemeContext.Provider>
+    </>
   );
 }
 
