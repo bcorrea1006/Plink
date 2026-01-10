@@ -1,10 +1,8 @@
 import type { Piano } from './types/piano';
-import { Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { ThemeContext } from './components/context/ThemeContext';
 import MapCenter from './components/MapCenter';
 import ThemeToggle from './components/ThemeToggle';
-import SignIn from './components/SignIn';
 import 'leaflet/dist/leaflet.css';
 
 function App() {
@@ -55,9 +53,6 @@ function App() {
 
   return (
     <>
-      <Routes>
-        <Route path='/signin' element={<SignIn />} />
-      </Routes>
       <ThemeContext.Provider value={{ isLight, toggleTheme }}>
         <div
           style={{ height: `${viewportHeight}px` }}

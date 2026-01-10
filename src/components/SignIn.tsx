@@ -23,7 +23,13 @@ const SignIn: React.FC = () => {
     return () => ui.reset();
   }, []);
 
-  return <div id='firebaseui-auth-container'></div>;
+  return (
+    <div id='firebaseui-auth-container'>
+      Okay... so this is the div, huh? Where does the CONTINUE AS GUEST button
+      come from??? And how do I access it so that I can change what happens when
+      the user clicks on it?
+    </div>
+  );
 };
 
 export default SignIn;
