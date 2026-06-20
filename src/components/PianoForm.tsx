@@ -10,15 +10,15 @@ type PianoMarker = {
   notes?: string;
 };
 
-type PianoMarkerFormProps = {
+type PianoFormProps = {
   piano: Piano;
   onUpdate: (updateMarker: Piano) => void;
 };
 
-export default function PianoMarkerForm({
+export default function PianoForm({
   piano,
   onUpdate,
-}: PianoMarkerFormProps) {
+}: PianoFormProps) {
   const [marker, setMarker] = useState<PianoMarker>({
     quality: piano.quality,
     tuned: piano.tuned,
