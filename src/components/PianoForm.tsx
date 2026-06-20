@@ -103,7 +103,7 @@ export default function PianoForm({
         <label className='font-medium'>Tuned?</label>
       </div>
 
-      {/* Acces Select */}
+      {/* Access Select */}
       <div>
         <label className='block font-medium mb-1'>Access Permissions</label>
         <select
