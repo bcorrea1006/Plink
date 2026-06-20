@@ -1,4 +1,4 @@
-import PianoMarkerForm from './PianoMarkerForm';
+import PianoMarkerForm from './PianoForm';
 import type { Piano } from '../types/piano';
 
 type SidePanelProps = {
@@ -28,7 +28,7 @@ export default function SidePanel({
     >
       {/* Close Panel Button */}
       <div className='p-4 border-b flex justify-between items-baseline'>
-        <h2 className='text-lg font-bold'>Editing...</h2>
+        <h2 className='text-lg font-bold'>Piano Details... </h2>
         <button onClick={onClose} className='text-gray-500 hover:text-black'>
           ✕
         </button>

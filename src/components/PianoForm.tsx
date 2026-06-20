@@ -74,7 +74,7 @@ export default function PianoMarkerForm({
     >
       {/* Star Rating */}
       <div>
-        <label className='block font-medium mb-1'>Piano Quality</label>
+        <label className='block font-medium mb-1'>Piano Quality!!!</label>
         <div className='flex space-x-1'>
           {[1, 2, 3, 4, 5].map((star) => (
             <button
