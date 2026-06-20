@@ -1,4 +1,3 @@
-import PianoMarkerForm from './PianoForm';
 import type { Piano } from '../types/piano';
 
 type SidePanelProps = {
@@ -34,9 +33,6 @@ export default function SidePanel({
         </button>
       </div>
       {/* Conditionally render the content if a piano is selected */}
-      <div className='p-4'>
-        {piano && <PianoMarkerForm piano={piano} onUpdate={onUpdate} />}
-      </div>
     </div>
   );
 }
