@@ -1,8 +1,12 @@
+import type { Review } from '../types/review.ts';
+
 export type Piano = {
   id: string;
-  position: [number, number];
-  quality: number; // 1-5 rating
-  tuned: boolean;
-  access: 'public' | 'private' | 'restricted';
-  notes?: string;
+  name: string;
+  location: [number, number];
+  // TODO: add avg rating once backend hooked up
+}
+
+export type PianoDetail = Piano & {
+  reviews: Review[];
 }

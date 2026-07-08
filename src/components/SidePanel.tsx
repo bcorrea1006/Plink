@@ -1,19 +1,12 @@
-import PianoMarkerForm from './PianoMarkerForm';
-import type { Piano } from '../types/piano';
-
 type SidePanelProps = {
   isOpen: boolean;
   onClose: () => void;
-  piano: Piano | null;
-  onUpdate: (updated: Piano) => void;
   isLight: boolean;
 };
 
 export default function SidePanel({
   isOpen,
   onClose,
-  piano,
-  onUpdate,
   isLight,
 }: SidePanelProps) {
   return (
@@ -28,14 +21,10 @@ export default function SidePanel({
     >
       {/* Close Panel Button */}
       <div className='p-4 border-b flex justify-between items-baseline'>
-        <h2 className='text-lg font-bold'>Editing...</h2>
+        <h2 className='text-lg font-bold'>Piano Details... </h2>
         <button onClick={onClose} className='text-gray-500 hover:text-black'>
           ✕
         </button>
-      </div>
-      {/* Conditionally render the content if a piano is selected */}
-      <div className='p-4'>
-        {piano && <PianoMarkerForm piano={piano} onUpdate={onUpdate} />}
       </div>
     </div>
   );

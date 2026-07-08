@@ -119,8 +119,6 @@ export default function MapCenter({
               setIsOpen(false);
               onSelectPiano(null);
             }}
-            piano={selectedPiano}
-            onUpdate={onUpdatePiano}
             isLight={isLight}
           ></SidePanel>
         </MapContainer>
