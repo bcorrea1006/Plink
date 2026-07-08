@@ -32,6 +32,7 @@ export default function MapCenter({
   onPlacementConfirm,
 }: MapCenterProps) {
   useEffect(() => {
+    // TODO: consider rendering map first then gathering location
     // Fetch initial location
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
@@ -41,7 +42,12 @@ export default function MapCenter({
         },
         (err) => {
           console.error('Error fetching geolocation:', err);
+          console.error('Defaulting to Seattle');
           setPosition([47.6061, -122.3328]); // Default to Seattle
+        }, {
+          timeout: 3000,
+          maximumAge: 60000, // Update user location every minute
+          enableHighAccuracy: false
         }
       );
     } else {
