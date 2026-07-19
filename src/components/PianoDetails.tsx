@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { ThemeContext } from './context/ThemeContext';
-import type { Piano } from '../types/piano';
+import type { PianoDetail } from '../types/piano';
 
-type PianoDetailsProps = { piano: Piano };
+type PianoDetailsProps = { piano: PianoDetail };
 
 export default function PianoDetails({ piano }: PianoDetailsProps) {
   const { isLight } = useContext(ThemeContext);
@@ -17,19 +17,19 @@ export default function PianoDetails({ piano }: PianoDetailsProps) {
       </p>
       <p>
         <strong>quality: </strong>
-        {piano.quality}
+        {piano.reviews[0].rating}
       </p>
       <p>
         <strong>tuned:</strong>
-        {piano.tuned ? ' YEAH!!' : ' naaah'}
+        {piano.reviews[0].tuning ? ' YEAH!!' : ' naaah'}
       </p>
       <p>
         <strong>access: </strong>
-        {piano.access}
+        {piano.reviews[0].access}
       </p>
       <p>
         <strong>notes: </strong>
-        {piano.notes}
+        {piano.reviews[0].notes}
       </p>
     </div>
   );

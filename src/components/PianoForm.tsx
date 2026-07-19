@@ -1,7 +1,9 @@
+// TODO: Figure out how to get PianoForm to work with
+//       Reviews field for multiple reviews.
 import { useEffect } from 'react';
 import { useContext, useState } from 'react';
 import { ThemeContext } from './context/ThemeContext';
-import type { Piano } from '../types/piano';
+import type { PianoDetail } from '../types/piano';
 
 type PianoMarker = {
   quality: number; // 1 - 5 stars
@@ -11,8 +13,8 @@ type PianoMarker = {
 };
 
 type PianoFormProps = {
-  piano: Piano;
-  onUpdate: (updateMarker: Piano) => void;
+  piano: PianoDetail;
+  onUpdate: (updateMarker: PianoDetail) => void;
 };
 
 export default function PianoForm({
@@ -56,7 +58,7 @@ export default function PianoForm({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const updatedPiano: Piano = {
+    const updatedPiano: PianoDetail = {
       ...piano,
       ...marker,
     };

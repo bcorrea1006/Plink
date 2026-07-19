@@ -2,7 +2,7 @@ import 'leaflet/dist/leaflet.css';
 import { useContext, useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import { ThemeContext } from './context/ThemeContext';
-import type { Piano } from '../types/piano';
+import type { PianoDetail } from '../types/piano';
 import AddButton from './AddButton';
 import PlacementOverlay from './PlacementOverlay';
 import SidePanel from './SidePanel';
@@ -11,10 +11,10 @@ import PianoDetails from './PianoDetails';
 interface MapCenterProps {
   position: [number, number] | null;
   setPosition: React.Dispatch<React.SetStateAction<[number, number] | null>>;
-  pianos: Piano[];
-  selectedPiano: Piano | null;
-  onSelectPiano: React.Dispatch<React.SetStateAction<Piano | null>>;
-  onUpdatePiano: (updated: Piano) => void;
+  pianos: PianoDetail[];
+  selectedPiano: PianoDetail | null;
+  onSelectPiano: React.Dispatch<React.SetStateAction<PianoDetail | null>>;
+  onUpdatePiano: (updated: PianoDetail) => void;
   isPlacing: boolean;
   setIsPlacing: React.Dispatch<React.SetStateAction<boolean>>;
   onPlacementConfirm: (center: [number, number]) => void;
@@ -81,7 +81,7 @@ export default function MapCenter({
           />
           {/* Render Piano Markers dynamically */}
           {pianos.map((piano) => (
-            <Marker key={piano.id} position={piano.position}>
+            <Marker key={piano.id} position={piano.location}>
               <Popup
                 autoClose={false}
                 closeOnClick={false}
