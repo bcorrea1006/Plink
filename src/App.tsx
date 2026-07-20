@@ -1,11 +1,16 @@
+// External libraries
 import { useState, useEffect } from 'react';
+// Side effects
 import 'leaflet/dist/leaflet.css';
-import MapCenter from './components/MapCenter';
+// Local components
+import { MapCenter } from './components/MapCenter';
+import { Modal } from './components/Modal';
+import { ThemeToggle } from './components/ThemeToggle';
+// Context
+import { ThemeContext } from './components/context/ThemeContext';
+// Types
 import type { PianoDetail } from './types/piano';
 import type { Review } from './types/review';
-import { ThemeToggle } from './components/ThemeToggle';
-import { ThemeContext } from './components/context/ThemeContext';
-import { Modal } from './components/Modal';
 
 function App() {
   const [position, setPosition] = useState<[number, number] | null>(null); // The user's current position

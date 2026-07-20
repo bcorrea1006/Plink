@@ -1,12 +1,17 @@
-import 'leaflet/dist/leaflet.css';
+// External libraries
 import { useContext, useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import { ThemeContext } from './context/ThemeContext';
-import type { PianoDetail } from '../types/piano';
+// Side effects
+import 'leaflet/dist/leaflet.css';
+// Local components
 import AddButton from './AddButton';
+import PianoDetails from './PianoDetails';
 import PlacementOverlay from './PlacementOverlay';
 import SidePanel from './SidePanel';
-import PianoDetails from './PianoDetails';
+// Context
+import { ThemeContext } from './context/ThemeContext';
+// Types
+import type { PianoDetail } from '../types/piano';
 
 interface MapCenterProps {
   position: [number, number] | null;
@@ -20,7 +25,7 @@ interface MapCenterProps {
   onPlacementConfirm: (center: [number, number]) => void;
 }
 
-export default function MapCenter({
+export function MapCenter({
   position,
   setPosition,
   pianos,
