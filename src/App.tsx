@@ -3,14 +3,18 @@ import 'leaflet/dist/leaflet.css';
 import MapCenter from './components/MapCenter';
 import type { PianoDetail } from './types/piano';
 import type { Review } from './types/review';
-import ThemeToggle from './components/ThemeToggle';
+import { ThemeToggle } from './components/ThemeToggle';
 import { ThemeContext } from './components/context/ThemeContext';
+import { Modal } from './components/Modal';
 
 function App() {
   const [position, setPosition] = useState<[number, number] | null>(null); // The user's current position
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
   const [isPlacing, setIsPlacing] = useState(false);
   const [isLight, setIsLight] = useState(true);
+
+  // Modal window state
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Theme controls
   const toggleTheme = () => setIsLight((prev) => !prev);
@@ -27,6 +31,7 @@ function App() {
   };
 
   const addPiano = (position: [number, number]) => {
+    setIsModalOpen(true);
     const newPiano: PianoDetail = {
       id: crypto.randomUUID(),
       name: 'placeholder',
@@ -73,6 +78,7 @@ function App() {
             onToggle={() => setIsLight((prev) => !prev)}
           />
         </div>
+        {isModalOpen && <Modal onToggleModal={() => setIsModalOpen(!isModalOpen)} />}
         <MapCenter
           position={position}
           setPosition={setPosition}

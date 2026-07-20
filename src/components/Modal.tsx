@@ -2,7 +2,7 @@ interface ModalProps {
   onToggleModal: () => void;
 }
 
-export default function Modal({
+export function Modal({
   onToggleModal,
 }: ModalProps ) {
   return (

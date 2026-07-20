@@ -6,7 +6,7 @@ type ThemeToggleProps = {
   onToggle: () => void;
 };
 
-export default function ThemeToggle({ isLight, onToggle }: ThemeToggleProps) {
+export function ThemeToggle({ isLight, onToggle }: ThemeToggleProps) {
   return (
     <button
       onClick={onToggle}
