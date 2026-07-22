@@ -12,6 +12,7 @@ import SidePanel from './SidePanel';
 import { ThemeContext } from './context/ThemeContext';
 // Types
 import type { PianoDetail } from '../types/piano';
+import { CancelButton } from './CancelButton';
 
 interface MapCenterProps {
   position: [number, number] | null;
@@ -59,10 +60,18 @@ export function MapCenter({
 
   return (
     <div className='h-full w-full relative z-0'>
-      <AddButton
-        isPlacing={isPlacing}
-        onTogglePlacement={() => setIsPlacing((prev) => !prev)}
-      />
+      {isPlacing ? (
+        <CancelButton
+          onCancel={() => setIsPlacing((prev) => !prev)}
+          className='absolute bottom-6 right-6 z-100'
+        />
+       ) : (
+        <AddButton
+          isPlacing={isPlacing}
+          onTogglePlacement={() => setIsPlacing((prev) => !prev)}
+        />
+       )
+      }
       {position ? (
         <MapContainer
           center={position}

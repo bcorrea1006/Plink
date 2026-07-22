@@ -13,7 +13,7 @@ export default function AddButton({
     <button
       onClick={onTogglePlacement}
       className={`
-              pointer-events-auto absolute bottom-6 right-6 z-[10001]
+              pointer-events-auto absolute bottom-6 right-6 z-100
             text-black hover:text-white font-bold
               rounded-full w-14 aspect-square flex items-center justify-center
               shadow-lg transition
