@@ -74,6 +74,18 @@ export default function PianoForm({
         isLight ? 'bg-white text-black' : 'bg-[#2c2c2c] text-white'
       }`}
     >
+      {/* Name input box */}
+
+      {/* Tuning slider */}
+
+      {/* Access drop-down */}
+
+      {/* Overall rating (stars) */}
+
+      {/* Notes input */}
+
+      {/* Image upload */}
+
       {/* Star Rating */}
       <div>
         <label className='block font-medium mb-1'>Piano Quality!!!</label>
@@ -146,7 +158,7 @@ export default function PianoForm({
         type='submit'
         className='w-full bg-blue-500 text-white font-medium py-2 rounded hover:bg-blue-600 transition'
       >
-        Save Piano Marker
+        suave Piano Marker
       </button>
     </form>
   );
