@@ -5,6 +5,10 @@ import { useContext, useState } from 'react';
 import { ThemeContext } from './context/ThemeContext';
 import type { PianoDetail } from '../types/piano';
 
+type Location = {
+  location: [number, number]
+}
+
 type PianoMarker = {
   quality: number; // 1 - 5 stars
   tuned: boolean;
@@ -13,6 +17,7 @@ type PianoMarker = {
 };
 
 type PianoFormProps = {
+  location: Location;
   piano: PianoDetail;
   onUpdate: (updateMarker: PianoDetail) => void;
 };
