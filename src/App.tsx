@@ -27,6 +27,7 @@ function App() {
   // Piano state logic
   const [pianos, setPianos] = useState<PianoDetail[]>([]);
   const [selectedPiano, setSelectedPiano] = useState<PianoDetail | null>(null);
+  const [pianoDraft, setPianoDraft] = useState<PianoDraft | null>(null);
 
   // Called by PianoMarkerForm
   const updatePiano = (updated: PianoDetail) => {
@@ -35,8 +36,12 @@ function App() {
     );
   };
 
-  const addPiano = (position: [number, number]) => {
+  const confirmPlacement = (position: [number, number]) => {
+    setIsPlacing(false);
     setIsModalOpen(true);
+  }
+
+  const addPiano = (position: [number, number]) => {
     const newPiano: PianoDetail = {
       id: crypto.randomUUID(),
       name: 'placeholder',
@@ -93,7 +98,7 @@ function App() {
           onUpdatePiano={updatePiano}
           isPlacing={isPlacing}
           setIsPlacing={setIsPlacing}
-          onPlacementConfirm={addPiano}
+          onPlacementConfirm={confirmPlacement}
         />
       </div>
     </ThemeContext.Provider>
