@@ -14,17 +14,11 @@ export default function AddButton({
       onClick={onTogglePlacement}
       className={`
               pointer-events-auto absolute bottom-6 right-6 z-100
-            text-black hover:text-white font-bold
+            text-black text-2xl hover:text-white font-bold border
               rounded-full w-14 aspect-square flex items-center justify-center
-              shadow-lg transition
-        ${
-          isPlacing
-            ? 'bg-red-600 hover:bg-red-700'
-            : 'bg-pink-400 hover:bg-pink-700'
-        }
-             `}
+              shadow-lg transition bg-green-400 hover:bg-green-700`}
     >
-      {isPlacing ? 'X' : '+'}
+      +
     </button>
   );
 }
