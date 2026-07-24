@@ -23,7 +23,7 @@ interface MapCenterProps {
   onUpdatePiano: (updated: PianoDetail) => void;
   isPlacing: boolean;
   setIsPlacing: React.Dispatch<React.SetStateAction<boolean>>;
-  onPlacementConfirm: (center: [number, number]) => void;
+  confirmPlacement: (center: [number, number]) => void;
 }
 
 export function MapCenter({
@@ -35,7 +35,7 @@ export function MapCenter({
   onUpdatePiano,
   isPlacing,
   setIsPlacing,
-  onPlacementConfirm,
+  confirmPlacement,
 }: MapCenterProps) {
   useEffect(() => {
     // Fetch initial location
@@ -81,7 +81,7 @@ export function MapCenter({
           {isPlacing && (
             <PlacementOverlay
               onCancel={() => setIsPlacing(false)}
-              onConfirm={onPlacementConfirm}
+              onConfirm={confirmPlacement}
             />
           )}
           <ResizeOnPlacement isPlacing={isPlacing} />
