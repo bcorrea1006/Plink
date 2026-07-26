@@ -43,7 +43,7 @@ function App() {
 
     setPianoDraft({
       location: {
-        lattitude: position[0],
+        latitude: position[0],
         longitude: position[1]
       },
     });
