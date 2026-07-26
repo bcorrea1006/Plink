@@ -10,6 +10,7 @@ import { ThemeToggle } from './components/ThemeToggle';
 import { ThemeContext } from './components/context/ThemeContext';
 // Types
 import type { PianoDetail } from './types/piano';
+import type { PianoDraft } from './types/pianoDraft';
 import type { Review } from './types/review';
 
 function App() {
@@ -39,6 +40,13 @@ function App() {
   const confirmPlacement = (position: [number, number]) => {
     setIsPlacing(false);
     setIsModalOpen(true);
+
+    setPianoDraft({
+      location: {
+        lattitude: position[0],
+        longitude: position[1]
+      },
+    });
   }
 
   const addPiano = (position: [number, number]) => {
