@@ -106,7 +106,7 @@ function App() {
           onUpdatePiano={updatePiano}
           isPlacing={isPlacing}
           setIsPlacing={setIsPlacing}
-          onPlacementConfirm={confirmPlacement}
+          confirmPlacement={confirmPlacement}
         />
       </div>
     </ThemeContext.Provider>
