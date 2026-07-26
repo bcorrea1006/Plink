@@ -8,11 +8,11 @@ import AddButton from './AddButton';
 import PianoDetails from './PianoDetails';
 import PlacementOverlay from './PlacementOverlay';
 import SidePanel from './SidePanel';
+import { CancelButton } from './CancelButton';
 // Context
 import { ThemeContext } from './context/ThemeContext';
 // Types
 import type { PianoDetail } from '../types/piano';
-import { CancelButton } from './CancelButton';
 
 interface MapCenterProps {
   position: [number, number] | null;

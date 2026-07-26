@@ -30,7 +30,7 @@ function App() {
   const [selectedPiano, setSelectedPiano] = useState<PianoDetail | null>(null);
   const [pianoDraft, setPianoDraft] = useState<PianoDraft | null>(null);
 
-  // Called by PianoMarkerForm
+  // Called by PianoForm
   const updatePiano = (updated: PianoDetail) => {
     setPianos((prev) =>
       prev.map((p) => (p.id === updated.id ? { ...p, ...updated } : p))
