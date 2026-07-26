@@ -1,7 +1,12 @@
+import PianoForm from './PianoForm';
 import { CancelButton } from './CancelButton';
+import type { PianoDraft } from '../types/pianoDraft';
+import type { PianoDetail } from '../types/piano';
 
 interface ModalProps {
   onToggleModal: () => void;
+  pianoDraft: PianoDraft;
+  updatePianos: (updated: PianoDetail) => void;
 }
 
 export function Modal({
