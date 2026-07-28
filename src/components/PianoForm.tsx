@@ -15,12 +15,7 @@ export default function PianoForm({
   piano,
   onUpdate,
 }: PianoFormProps) {
-  const [marker, setMarker] = useState<PianoMarker>({
-    quality: piano.quality,
-    tuned: piano.tuned,
-    access: piano.access,
-    notes: piano.notes,
-  });
+  const [pianoDraft, setPianoDraft] = useState<PianoDraft>();
 
   useEffect(() => {
     if (piano) {
