@@ -17,7 +17,6 @@ type PianoMarker = {
 };
 
 type PianoFormProps = {
-  location: Location;
   piano: PianoDetail;
   onUpdate: (updateMarker: PianoDetail) => void;
 };
