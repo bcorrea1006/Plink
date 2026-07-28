@@ -6,17 +6,6 @@ import { ThemeContext } from './context/ThemeContext';
 import type { PianoDetail } from '../types/piano';
 import type { PianoDraft } from '../types/pianoDraft'
 
-type Location = {
-  location: [number, number]
-}
-
-type PianoMarker = {
-  quality: number; // 1 - 5 stars
-  tuned: boolean;
-  access: 'public' | 'private' | 'restricted';
-  notes?: string;
-};
-
 type PianoFormProps = {
   piano: PianoDraft;
   onUpdate: (updateMarker: PianoDetail) => void;
