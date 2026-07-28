@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useContext, useState } from 'react';
 import { ThemeContext } from './context/ThemeContext';
 import type { PianoDetail } from '../types/piano';
+import type { PianoDraft } from '../types/pianoDraft'
 
 type Location = {
   location: [number, number]
@@ -17,7 +18,7 @@ type PianoMarker = {
 };
 
 type PianoFormProps = {
-  piano: PianoDetail;
+  piano: PianoDraft;
   onUpdate: (updateMarker: PianoDetail) => void;
 };
 
