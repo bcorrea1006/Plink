@@ -8,7 +8,7 @@ import type { PianoDraft } from '../types/pianoDraft'
 
 type PianoFormProps = {
   piano: PianoDraft;
-  onUpdate: (updateMarker: PianoDetail) => void;
+  onUpdate: (updatePiano: PianoDetail) => void;
 };
 
 export default function PianoForm({
@@ -47,11 +47,11 @@ export default function PianoForm({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const updatedPiano: PianoDetail = {
+    const newPiano: PianoDetail = {
       ...piano,
       ...marker,
     };
-    onUpdate(updatedPiano);
+    onUpdate(newPiano);
   };
 
   const { isLight } = useContext(ThemeContext);
