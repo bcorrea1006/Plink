@@ -19,7 +19,7 @@ export default function PianoForm({
 
   useEffect(() => {
     if (piano) {
-      setMarker({
+      setDraftPiano({
         quality: piano.quality,
         tuned: piano.tuned,
         access: piano.access,
@@ -29,7 +29,7 @@ export default function PianoForm({
   }, [piano]);
 
   const handleStarClick = (star: number) => {
-    setMarker((prev) => ({ ...prev, quality: star }));
+    setDraftPiano((prev) => ({ ...prev, quality: star }));
   };
 
   const handleChange = (
@@ -39,7 +39,7 @@ export default function PianoForm({
   ) => {
     const target = e.target as HTMLInputElement; // e.target normally types as EventTarget, which is too generic for the "checked" property.
     const { name, value, type, checked } = target;
-    setMarker((prev) => ({
+    setDraftPiano((prev) => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
     }));
@@ -85,7 +85,7 @@ export default function PianoForm({
               type='button'
               onClick={() => handleStarClick(star)}
               className={`text-5xl ${
-                marker.quality >= star ? 'text-yellow-400' : 'text-gray-300'
+                draftPiano.quality >= star ? 'text-yellow-400' : 'text-gray-300'
               } hover:text-yellow-500 transition`}
             >
               *
@@ -99,7 +99,7 @@ export default function PianoForm({
         <input
           type='checkbox'
           name='tuned'
-          checked={marker.tuned}
+          checked={draftPiano.tuned}
           onChange={handleChange}
           className='h-4 w-4 text-blue-600 border-gray-300 rounded'
         />
@@ -111,7 +111,7 @@ export default function PianoForm({
         <label className='block font-medium mb-1'>Access Permissions</label>
         <select
           name='access'
-          value={marker.access}
+          value={draftPiano.access}
           onChange={handleChange}
           className='w-full border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-blue-400'
         >
@@ -127,7 +127,7 @@ export default function PianoForm({
         <textarea
           name='notes'
           maxLength={120} // 120 chars max length
-          value={marker.notes || ''} // Keep input controlled
+          value={draftPiano.notes || ''} // Keep input controlled
           onChange={handleChange}
           placeholder='Add notes about this piano...'
           rows={1}
@@ -139,7 +139,7 @@ export default function PianoForm({
           }}
         />
         <p className='text-sm text-gray-500 mt-1'>
-          {marker.notes?.length || 0}/120 characters
+          {draftPiano.notes?.length || 0}/120 characters
         </p>
       </div>
 
