@@ -15,7 +15,7 @@ export default function PianoForm({
   piano,
   onUpdate,
 }: PianoFormProps) {
-  const [pianoDraft, setPianoDraft] = useState<PianoDraft>();
+  const [draftPiano, setDraftPiano] = useState<PianoDraft>();
 
   useEffect(() => {
     if (piano) {
