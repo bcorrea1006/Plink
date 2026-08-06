@@ -156,7 +156,7 @@ export default function PianoForm({
         type='submit'
         className='w-full bg-blue-500 text-white font-medium py-2 rounded hover:bg-blue-600 transition'
       >
-        suave Piano Marker
+        Submit
       </button>
     </form>
   );
