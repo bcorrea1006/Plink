@@ -4,29 +4,19 @@ import { useEffect } from 'react';
 import { useContext, useState } from 'react';
 import { ThemeContext } from './context/ThemeContext';
 import type { PianoDetail } from '../types/piano';
-import type { PianoDraft } from '../types/pianoDraft'
+import type { Review } from '../types/review';
 
 type PianoFormProps = {
-  piano: PianoDraft;
+  location: [number, number];
   onUpdate: (updatePiano: PianoDetail) => void;
 };
 
 export default function PianoForm({
-  piano,
+  location,
   onUpdate,
 }: PianoFormProps) {
-  const [draftPiano, setDraftPiano] = useState<PianoDraft>();
-
-  useEffect(() => {
-    if (piano) {
-      setDraftPiano({
-        quality: piano.quality,
-        tuned: piano.tuned,
-        access: piano.access,
-        notes: piano.notes || '',
-      });
-    }
-  }, [piano]);
+  const [pianoData, setPianoData] = useState<PianoDetail>();
+  const [reviewData, setReviewData] = useState<Review>();
 
   const handleStarClick = (star: number) => {
     setDraftPiano((prev) => ({ ...prev, quality: star }));
