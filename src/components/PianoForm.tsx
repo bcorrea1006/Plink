@@ -47,7 +47,7 @@ export default function PianoForm({
   ) => {
     const target = e.target as HTMLInputElement; // e.target normally types as EventTarget, which is too generic for the "checked" property.
     const { name, value, type, checked } = target;
-    setDraftPiano((prev) => ({
+    setReviewData((prev) => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
     }));
@@ -56,8 +56,8 @@ export default function PianoForm({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const newPiano: PianoDetail = {
-      ...piano,
-      ...marker,
+      ...pianoData,
+      reviews: [reviewData],
     };
     onUpdate(newPiano);
   };
@@ -93,7 +93,7 @@ export default function PianoForm({
               type='button'
               onClick={() => handleStarClick(star)}
               className={`text-5xl ${
-                draftPiano.quality >= star ? 'text-yellow-400' : 'text-gray-300'
+                reviewData.rating >= star ? 'text-yellow-400' : 'text-gray-300'
               } hover:text-yellow-500 transition`}
             >
               *
@@ -102,12 +102,13 @@ export default function PianoForm({
         </div>
       </div>
 
+      // TODO: Come back to resolve typing mismatch
       {/* Tuned Checkbox  */}
       <div className='flex items-center space-x-2'>
         <input
           type='checkbox'
           name='tuned'
-          checked={draftPiano.tuned}
+          checked={reviewData.tuning}
           onChange={handleChange}
           className='h-4 w-4 text-blue-600 border-gray-300 rounded'
         />
@@ -119,7 +120,7 @@ export default function PianoForm({
         <label className='block font-medium mb-1'>Access Permissions</label>
         <select
           name='access'
-          value={draftPiano.access}
+          value={reviewData.access}
           onChange={handleChange}
           className='w-full border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-blue-400'
         >
@@ -135,7 +136,7 @@ export default function PianoForm({
         <textarea
           name='notes'
           maxLength={120} // 120 chars max length
-          value={draftPiano.notes || ''} // Keep input controlled
+          value={reviewData.notes || ''} // Keep input controlled
           onChange={handleChange}
           placeholder='Add notes about this piano...'
           rows={1}
@@ -147,7 +148,7 @@ export default function PianoForm({
           }}
         />
         <p className='text-sm text-gray-500 mt-1'>
-          {draftPiano.notes?.length || 0}/120 characters
+          {reviewData.notes?.length || 0}/120 characters
         </p>
       </div>
 
