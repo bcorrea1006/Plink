@@ -1,6 +1,5 @@
 // TODO: Figure out how to get PianoForm to work with
 //       Reviews field for multiple reviews.
-import { useEffect } from 'react';
 import { useContext, useState } from 'react';
 import { ThemeContext } from './context/ThemeContext';
 import type { PianoDetail } from '../types/piano';
@@ -15,11 +14,30 @@ export default function PianoForm({
   location,
   onUpdate,
 }: PianoFormProps) {
-  const [pianoData, setPianoData] = useState<PianoDetail>();
-  const [reviewData, setReviewData] = useState<Review>();
 
-  const handleStarClick = (star: number) => {
-    setDraftPiano((prev) => ({ ...prev, quality: star }));
+  const emptyPiano: PianoDetail = {
+    id: '',
+    name: '',
+    location: [0, 0],
+    reviews: [],
+  }
+  const emptyReview: Review = {
+    id: '',
+    rating: 0,
+    tuning: 0,
+    access: 'public',
+    notes: '',
+    images: [],
+  }
+
+  const [pianoData, setPianoData] = useState<PianoDetail>({
+    ...emptyPiano,
+    location
+  });
+  const [reviewData, setReviewData] = useState<Review>(emptyReview);
+
+  const handleStarClick = (rating: number) => {
+    setReviewData((prev) => ({ ...prev, rating }));
   };
 
   const handleChange = (
