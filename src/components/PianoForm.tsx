@@ -24,7 +24,7 @@ export default function PianoForm({
   const emptyReview: Review = {
     id: '',
     rating: 0,
-    tuning: 0,
+    tuning: 50,
     access: 'public',
     notes: '',
     images: [],
@@ -102,17 +102,19 @@ export default function PianoForm({
         </div>
       </div>
 
-      // TODO: Come back to resolve typing mismatch
-      {/* Tuned Checkbox  */}
+      {/* Tuning Slider  */}
+      <label className='font-medium'>Tuning</label>
       <div className='flex items-center space-x-2'>
         <input
-          type='checkbox'
-          name='tuned'
-          checked={reviewData.tuning}
-          onChange={handleChange}
-          className='h-4 w-4 text-blue-600 border-gray-300 rounded'
+          id='tuning-slider'
+          type='range'
+          min={0}
+          max={100}
+          step={1}
+          // value={reviewData.tuning}
+          onChange={() => handleChange}
+          className='h-4 w-full cursor-pointer text-blue-600 border-gray-300 rounded'
         />
-        <label className='font-medium'>Tuned?</label>
       </div>
 
       {/* Access Select */}
