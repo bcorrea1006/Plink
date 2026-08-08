@@ -37,6 +37,10 @@ export default function PianoForm({
   const [reviewData, setReviewData] = useState<Review>(emptyReview);
 
   const handleStarClick = (rating: number) => {
+    // toggle star if already on
+    if (reviewData.rating === rating) {
+      rating--;
+    }
     setReviewData((prev) => ({ ...prev, rating }));
   };
 
@@ -94,7 +98,7 @@ export default function PianoForm({
               onClick={() => handleStarClick(star)}
               className={`text-5xl ${
                 reviewData.rating >= star ? 'text-yellow-400' : 'text-gray-300'
-              } hover:text-yellow-500`}
+              } hover:brightness-90`}
             >
               *
             </button>
