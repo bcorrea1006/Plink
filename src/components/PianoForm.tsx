@@ -85,7 +85,7 @@ export default function PianoForm({
 
       {/* Star Rating */}
       <div>
-        <label className='block font-medium mb-1'>Piano Quality!!!</label>
+        <label className='block font-medium mb-1'>Overall Quality</label>
         <div className='flex space-x-1'>
           {[1, 2, 3, 4, 5].map((star) => (
             <button
@@ -94,7 +94,7 @@ export default function PianoForm({
               onClick={() => handleStarClick(star)}
               className={`text-5xl ${
                 reviewData.rating >= star ? 'text-yellow-400' : 'text-gray-300'
-              } hover:text-yellow-500 transition`}
+              } hover:text-yellow-500`}
             >
               *
             </button>
@@ -103,8 +103,8 @@ export default function PianoForm({
       </div>
 
       {/* Tuning Slider  */}
-      <label className='font-medium'>Tuning</label>
-      <div className='flex items-center space-x-2'>
+      <div className='flex-col items-center space-x-2'>
+        <label className='font-medium'>Tuning</label>
         <input
           id='tuning-slider'
           type='range'
@@ -140,7 +140,7 @@ export default function PianoForm({
           maxLength={120} // 120 chars max length
           value={reviewData.notes || ''} // Keep input controlled
           onChange={handleChange}
-          placeholder='Add notes about this piano...'
+          placeholder='Placeholder...'
           rows={1}
           className='w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition duration-150 placeholder-gray-400 resize-none overflow-hidden'
           onInput={(e) => {
