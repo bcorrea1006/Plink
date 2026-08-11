@@ -168,6 +168,13 @@ export default function PianoForm({
         </p>
       </div>
 
+      {/* Image upload button */}
+      <button
+        className={`w-1/2 bg-gray-300 font-medium py-1 rounded border-dashed border-2 border-gray-400`}
+      >
+        Add Photo
+      </button>
+
       <button
         type='submit'
         className='w-full bg-blue-500 text-white font-medium py-2 rounded hover:bg-blue-600 transition'
