@@ -76,16 +76,26 @@ export default function PianoForm({
       }`}
     >
       {/* Name input box */}
-
-      {/* Tuning slider */}
-
-      {/* Access drop-down */}
-
-      {/* Overall rating (stars) */}
-
-      {/* Notes input */}
-
-      {/* Image upload */}
+      <div>
+        <label className='block font-medium mb-1'>Piano Name</label>
+        <textarea
+          name='name'
+          maxLength={50} // 120 chars max length
+          value={reviewData.notes || ''} // Keep input controlled
+          onChange={handleChange}
+          placeholder='Placeholder...'
+          rows={1}
+          className='w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition duration-150 placeholder-gray-400 resize-none overflow-hidden'
+          onInput={(e) => {
+            const target = e.target as HTMLTextAreaElement;
+            target.style.height = 'auto'; // reset height
+            target.style.height = `${target.scrollHeight}px`; // grow to fit content
+          }}
+        />
+        <p className='text-sm text-gray-500 mt-1'>
+          {pianoData.name?.length || 0}/50 characters
+        </p>
+      </div>
 
       {/* Star Rating */}
       <div>
