@@ -1,5 +1,6 @@
 // TODO: Figure out how to get PianoForm to work with
 //       Reviews field for multiple reviews.
+import { ImagePlus } from 'lucide-react';
 import { useContext, useState } from 'react';
 import { ThemeContext } from './context/ThemeContext';
 import type { PianoDetail } from '../types/piano';
@@ -170,8 +171,9 @@ export default function PianoForm({
 
       {/* Image upload button */}
       <button
-        className={`w-1/2 bg-gray-300 font-medium py-1 rounded border-dashed border-2 border-gray-400`}
+        className={`flex justify-evenly items-center w-3/4 bg-gray-300 font-medium py-1 rounded border-dashed border-2 border-gray-400`}
       >
+        <ImagePlus />
         Add Photo
       </button>
 
