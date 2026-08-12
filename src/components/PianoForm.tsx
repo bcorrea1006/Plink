@@ -171,7 +171,7 @@ export default function PianoForm({
 
       {/* Image upload button */}
       <button
-        className={`flex justify-evenly items-center w-3/4 bg-gray-300 font-medium py-1 rounded border-dashed border-2 border-gray-400`}
+        className={`flex justify-evenly mx-auto items-center w-3/4 bg-gray-300 font-medium py-1 rounded border-dashed border-2 border-gray-400`}
       >
         <ImagePlus />
         Add Photo
