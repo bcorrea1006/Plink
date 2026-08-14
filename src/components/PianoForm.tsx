@@ -95,7 +95,7 @@ export default function PianoForm({
         <label className='block font-medium mb-1'>Piano Name</label>
         <textarea
           name='name'
-          maxLength={500} // 50 chars max length
+          maxLength={50} // 50 chars max length
           value={pianoData.name || ''} // Keep input controlled
           onChange={handleChange}
           placeholder='Placeholder...'
@@ -166,7 +166,7 @@ export default function PianoForm({
         <label className='block font-medium mb-1'>Notes</label>
         <textarea
           name='notes'
-          maxLength={500} // 120 chars max length
+          maxLength={120} // 120 chars max length
           value={reviewData.notes || ''} // Keep input controlled
           onChange={handleChange}
           placeholder='Placeholder...'
