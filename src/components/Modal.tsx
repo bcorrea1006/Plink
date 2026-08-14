@@ -1,17 +1,16 @@
 import PianoForm from './PianoForm';
 import { CancelButton } from './CancelButton';
-import type { PianoDraft } from '../types/pianoDraft';
 import type { PianoDetail } from '../types/piano';
 
 interface ModalProps {
   onToggleModal: () => void;
-  pianoDraft: PianoDraft;
+  location: [number, number];
   updatePianos: (updated: PianoDetail) => void;
 }
 
 export function Modal({
   onToggleModal,
-  pianoDraft,
+  location,
   updatePianos
 }: ModalProps ) {
 
@@ -21,7 +20,7 @@ export function Modal({
         <CancelButton onCancel={onToggleModal} className='absolute top-6 left-6'/>
         <h1>This is the modal window</h1>
         <PianoForm
-          piano={pianoDraft}
+          location={location}
           onUpdate={updatePianos}
         />
       </div>
