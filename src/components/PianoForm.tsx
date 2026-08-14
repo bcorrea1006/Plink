@@ -45,17 +45,31 @@ export default function PianoForm({
     setReviewData((prev) => ({ ...prev, rating }));
   };
 
+  // generic setState for PianoDetail or Reveiw objects
+  const updateData = <T extends object>(
+    setter: React.Dispatch<React.SetStateAction<T>>,
+    name: string,
+    value: string,
+  ) => {
+    setter((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
   ) => {
     const target = e.target as HTMLInputElement; // e.target normally types as EventTarget, which is too generic for the "checked" property.
-    const { name, value, type, checked } = target;
-    setReviewData((prev) => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value,
-    }));
+    const { name, value, } = target;
+
+    if (Object.hasOwn(pianoData, name)) {
+      updateData(setPianoData, name, value); // 'name' input box
+    } else {
+      updateData(setReviewData, name, value); // 'review' input box
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -82,7 +96,7 @@ export default function PianoForm({
         <textarea
           name='name'
           maxLength={50} // 120 chars max length
-          value={reviewData.notes || ''} // Keep input controlled
+          value={pianoData.name || ''} // Keep input controlled
           onChange={handleChange}
           placeholder='Placeholder...'
           rows={1}
