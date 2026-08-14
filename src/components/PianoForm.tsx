@@ -86,7 +86,7 @@ export default function PianoForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className={`max-w-md mx-auto p-6 rounded-xl space-y-4 ${
+      className={`w-full px-20 overflow-y-auto max-w-md mx-auto mt-10 p-6 rounded-xl space-y-4 ${
         isLight ? 'bg-white text-black' : 'bg-[#2c2c2c] text-white'
       }`}
     >
@@ -95,7 +95,7 @@ export default function PianoForm({
         <label className='block font-medium mb-1'>Piano Name</label>
         <textarea
           name='name'
-          maxLength={50} // 120 chars max length
+          maxLength={500} // 50 chars max length
           value={pianoData.name || ''} // Keep input controlled
           onChange={handleChange}
           placeholder='Placeholder...'
@@ -166,7 +166,7 @@ export default function PianoForm({
         <label className='block font-medium mb-1'>Notes</label>
         <textarea
           name='notes'
-          maxLength={120} // 120 chars max length
+          maxLength={500} // 120 chars max length
           value={reviewData.notes || ''} // Keep input controlled
           onChange={handleChange}
           placeholder='Placeholder...'
@@ -185,7 +185,7 @@ export default function PianoForm({
 
       {/* Image upload button */}
       <button
-        className={`flex justify-evenly mx-auto items-center w-3/4 bg-gray-300 font-medium py-1 rounded border-dashed border-2 border-gray-400`}
+        className={`mx-auto flex px-5 gap-2 items-center bg-gray-300 font-medium py-1 rounded border-dashed border-2 border-gray-400`}
       >
         <ImagePlus />
         Add Photo
@@ -193,7 +193,7 @@ export default function PianoForm({
 
       <button
         type='submit'
-        className='w-full bg-blue-500 text-white font-medium py-2 rounded hover:bg-blue-600 transition'
+        className={`block mx-auto max-w-sm w-3/4 mt-8 bg-blue-500 text-white font-medium py-2 rounded hover:bg-blue-600 transition`}
       >
         Submit
       </button>
