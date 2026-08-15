@@ -86,7 +86,7 @@ export default function PianoForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className={`w-full px-20 overflow-y-auto max-w-md mx-auto mt-10 p-6 rounded-xl space-y-4 ${
+      className={`w-full px-10 overflow-y-auto max-w-md mx-auto mt-10 p-6 rounded-xl space-y-4 ${
         isLight ? 'bg-white text-black' : 'bg-[#2c2c2c] text-white'
       }`}
     >
