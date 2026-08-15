@@ -12,7 +12,7 @@ export function CancelButton({
       onClick={onCancel}
       className={ className + ' pointer-events-auto bg-red-500 ' +
         'hover:bg-red-600 text-black hover:text-white font-bold border ' +
-        'transition rounded-full aspect-square w-14'}
+        'transition rounded-full aspect-square'}
       >
         X
     </button>
