@@ -1,7 +1,7 @@
 // TODO: Figure out how to get PianoForm to work with
 //       Reviews field for multiple reviews.
 import { ImagePlus } from 'lucide-react';
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { ThemeContext } from './context/ThemeContext';
 import type { PianoDetail } from '../types/piano';
 import type { Review } from '../types/review';
@@ -71,6 +71,23 @@ export default function PianoForm({
       updateData(setReviewData, name, value); // 'review' input box
     }
   };
+
+  // Helpers to support image uploading
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [image, setImage] = useState<File | null>(null);
+
+  function handleButtonClick() {
+    fileInputRef.current?.click();
+  }
+
+  function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+
+    if (file) {
+      setImage(file);
+    }
+  }
+
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -184,12 +201,25 @@ export default function PianoForm({
       </div>
 
       {/* Image upload button */}
-      <button
-        className={`mx-auto flex px-5 gap-2 items-center bg-gray-300 font-medium py-1 rounded border-dashed border-2 border-gray-400`}
-      >
-        <ImagePlus />
-        Add Photo
-      </button>
+      <div className='flex flex-col items-center'>
+        <button
+          className={`mx-auto flex px-5 gap-2 items-center bg-gray-300 font-medium py-1 rounded border-dashed border-2 border-gray-400`}
+          onClick={handleButtonClick}
+          >
+          <ImagePlus />
+          Add Photo
+        </button>
+
+        {image && <p>{image.name}</p>}
+
+        <input
+          ref={fileInputRef}
+          type='file'
+          accept='image/*'
+          onChange={handleFileChange}
+          hidden
+        />
+      </div>
 
       <button
         type='submit'
