@@ -1,5 +1,3 @@
-// TODO: Figure out how to get PianoForm to work with
-//       Reviews field for multiple reviews.
 import { ImagePlus } from 'lucide-react';
 import { useContext, useRef, useState } from 'react';
 import { ThemeContext } from './context/ThemeContext';
