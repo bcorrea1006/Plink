@@ -41,10 +41,7 @@ function App() {
     setIsModalOpen(true);
 
     setPianoDraft({
-      location: {
-        latitude: position[0],
-        longitude: position[1]
-      },
+      location: position
     });
   }
 
@@ -89,7 +86,12 @@ function App() {
           isLight ? 'light-theme' : 'dark-theme'
         }`}
       >
-        {isModalOpen && <Modal onToggleModal={() => setIsModalOpen(!isModalOpen)}/>}
+        {isModalOpen && pianoDraft &&
+          <Modal
+            onToggleModal={() => setIsModalOpen(!isModalOpen)}
+            location={pianoDraft.location}
+            updatePianos={() => addPiano}
+          />}
         <div className='absolute top-4 left-20 z-25'>
           <ThemeToggle
             isLight={isLight}
