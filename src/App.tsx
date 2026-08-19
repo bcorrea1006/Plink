@@ -1,9 +1,17 @@
+// External libraries
 import { useState, useEffect } from 'react';
+// Side effects
 import 'leaflet/dist/leaflet.css';
-import MapCenter from './components/MapCenter';
-import type { Piano } from './types/piano';
-import ThemeToggle from './components/ThemeToggle';
+// Local components
+import { MapCenter } from './components/MapCenter';
+import { Modal } from './components/Modal';
+import { ThemeToggle } from './components/ThemeToggle';
+// Context
 import { ThemeContext } from './components/context/ThemeContext';
+// Types
+import type { PianoDetail } from './types/piano';
+import type { PianoDraft } from './types/pianoDraft';
+import type { Review } from './types/review';
 
 function App() {
   const [position, setPosition] = useState<[number, number] | null>(null); // The user's current position
@@ -11,27 +19,50 @@ function App() {
   const [isPlacing, setIsPlacing] = useState(false);
   const [isLight, setIsLight] = useState(true);
 
+  // Modal window state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   // Theme controls
   const toggleTheme = () => setIsLight((prev) => !prev);
 
   // Piano state logic
-  const [pianos, setPianos] = useState<Piano[]>([]);
-  const [selectedPiano, setSelectedPiano] = useState<Piano | null>(null);
+  const [pianos, setPianos] = useState<PianoDetail[]>([]);
+  const [selectedPiano, setSelectedPiano] = useState<PianoDetail | null>(null);
+  const [pianoDraft, setPianoDraft] = useState<PianoDraft | null>(null);
 
-  // Called by PianoMarkerForm
-  const updatePiano = (updated: Piano) => {
+  // Called by PianoForm
+  const updatePiano = (updated: PianoDetail) => {
     setPianos((prev) =>
       prev.map((p) => (p.id === updated.id ? { ...p, ...updated } : p))
     );
   };
 
+  const confirmPlacement = (position: [number, number]) => {
+    setIsPlacing(false);
+    setIsModalOpen(true);
+
+    setPianoDraft({
+      location: {
+        latitude: position[0],
+        longitude: position[1]
+      },
+    });
+  }
+
   const addPiano = (position: [number, number]) => {
-    const newPiano: Piano = {
+    const newPiano: PianoDetail = {
       id: crypto.randomUUID(),
-      position,
-      quality: 3,
-      tuned: false,
-      access: 'private',
+      name: 'placeholder',
+      location: position,
+      reviews: [
+        {
+          id: crypto.randomUUID(),
+          rating: 3,
+          tuning: 50,
+          access: 'private',
+          notes: 'placeholder'
+        },
+      ],
     };
 
     setPianos((prev) => [...prev, newPiano]);
@@ -59,7 +90,8 @@ function App() {
           isLight ? 'light-theme' : 'dark-theme'
         }`}
       >
-        <div className='absolute top-25 left-1.5 z-1000'>
+        {isModalOpen && <Modal onToggleModal={() => setIsModalOpen(!isModalOpen)}/>}
+        <div className='absolute top-4 left-20 z-25'>
           <ThemeToggle
             isLight={isLight}
             onToggle={() => setIsLight((prev) => !prev)}
@@ -74,7 +106,7 @@ function App() {
           onUpdatePiano={updatePiano}
           isPlacing={isPlacing}
           setIsPlacing={setIsPlacing}
-          onPlacementConfirm={addPiano}
+          confirmPlacement={confirmPlacement}
         />
       </div>
     </ThemeContext.Provider>

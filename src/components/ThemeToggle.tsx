@@ -6,11 +6,11 @@ type ThemeToggleProps = {
   onToggle: () => void;
 };
 
-export default function ThemeToggle({ isLight, onToggle }: ThemeToggleProps) {
+export function ThemeToggle({ isLight, onToggle }: ThemeToggleProps) {
   return (
     <button
       onClick={onToggle}
-      className={`w-10 h-10 flex items-center justify-center text-white rounded-full transition ${
+      className={`aspect-square w-14 flex items-center justify-center text-white rounded-full transition ${
         isLight
           ? 'bg-slate-800 hover:bg-slate-700'
           : 'bg-yellow-400 hover:bg-yellow-500'

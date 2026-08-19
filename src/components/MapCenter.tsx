@@ -1,26 +1,32 @@
-import 'leaflet/dist/leaflet.css';
+// External libraries
 import { useContext, useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import { ThemeContext } from './context/ThemeContext';
-import type { Piano } from '../types/piano';
+// Side effects
+import 'leaflet/dist/leaflet.css';
+// Local components
 import AddButton from './AddButton';
+import PianoDetails from './PianoDetails';
 import PlacementOverlay from './PlacementOverlay';
 import SidePanel from './SidePanel';
-import PianoDetails from './PianoDetails';
+import { CancelButton } from './CancelButton';
+// Context
+import { ThemeContext } from './context/ThemeContext';
+// Types
+import type { PianoDetail } from '../types/piano';
 
 interface MapCenterProps {
   position: [number, number] | null;
   setPosition: React.Dispatch<React.SetStateAction<[number, number] | null>>;
-  pianos: Piano[];
-  selectedPiano: Piano | null;
-  onSelectPiano: React.Dispatch<React.SetStateAction<Piano | null>>;
-  onUpdatePiano: (updated: Piano) => void;
+  pianos: PianoDetail[];
+  selectedPiano: PianoDetail | null;
+  onSelectPiano: React.Dispatch<React.SetStateAction<PianoDetail | null>>;
+  onUpdatePiano: (updated: PianoDetail) => void;
   isPlacing: boolean;
   setIsPlacing: React.Dispatch<React.SetStateAction<boolean>>;
-  onPlacementConfirm: (center: [number, number]) => void;
+  confirmPlacement: (center: [number, number]) => void;
 }
 
-export default function MapCenter({
+export function MapCenter({
   position,
   setPosition,
   pianos,
@@ -29,7 +35,7 @@ export default function MapCenter({
   onUpdatePiano,
   isPlacing,
   setIsPlacing,
-  onPlacementConfirm,
+  confirmPlacement,
 }: MapCenterProps) {
   useEffect(() => {
     // TODO: consider rendering map first then gathering location
@@ -60,10 +66,18 @@ export default function MapCenter({
 
   return (
     <div className='h-full w-full relative z-0'>
-      <AddButton
-        isPlacing={isPlacing}
-        onTogglePlacement={() => setIsPlacing((prev) => !prev)}
-      />
+      {isPlacing ? (
+        <CancelButton
+          onCancel={() => setIsPlacing((prev) => !prev)}
+          className='absolute bottom-6 right-6 z-100 w-14'
+        />
+       ) : (
+        <AddButton
+          isPlacing={isPlacing}
+          onTogglePlacement={() => setIsPlacing((prev) => !prev)}
+        />
+       )
+      }
       {position ? (
         <MapContainer
           center={position}
@@ -73,7 +87,7 @@ export default function MapCenter({
           {isPlacing && (
             <PlacementOverlay
               onCancel={() => setIsPlacing(false)}
-              onConfirm={onPlacementConfirm}
+              onConfirm={confirmPlacement}
             />
           )}
           <ResizeOnPlacement isPlacing={isPlacing} />
@@ -87,7 +101,7 @@ export default function MapCenter({
           />
           {/* Render Piano Markers dynamically */}
           {pianos.map((piano) => (
-            <Marker key={piano.id} position={piano.position}>
+            <Marker key={piano.id} position={piano.location}>
               <Popup
                 autoClose={false}
                 closeOnClick={false}
