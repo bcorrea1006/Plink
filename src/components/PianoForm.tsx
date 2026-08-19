@@ -83,6 +83,10 @@ export default function PianoForm({
 
     if (file) {
       setImage(file);
+      setReviewData((prev) => ({
+        ...prev,
+        images: [...( prev.images ?? [] ), file.name] // TODO: replace with actual img url eventually
+      }));
     }
   }
 
