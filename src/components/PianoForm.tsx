@@ -202,7 +202,8 @@ export default function PianoForm({
         </p>
       </div>
 
-      {/* Image upload button */}
+
+      {/* Image uploading */}
       <div className='flex flex-col items-center'>
 
         {/* Image preview */}
@@ -222,8 +223,7 @@ export default function PianoForm({
           Add Photo
         </button>
 
-        {image && <p>{image.name}</p>}
-
+        {/* Hidden ref */}
         <input
           ref={fileInputRef}
           type='file'
