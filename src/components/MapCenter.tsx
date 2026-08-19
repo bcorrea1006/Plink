@@ -63,7 +63,7 @@ export function MapCenter({
       {isPlacing ? (
         <CancelButton
           onCancel={() => setIsPlacing((prev) => !prev)}
-          className='absolute bottom-6 right-6 z-100'
+          className='absolute bottom-6 right-6 z-100 w-14'
         />
        ) : (
         <AddButton
