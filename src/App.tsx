@@ -11,7 +11,6 @@ import { ThemeContext } from './components/context/ThemeContext';
 // Types
 import type { PianoDetail } from './types/piano';
 import type { PianoDraft } from './types/pianoDraft';
-import type { Review } from './types/review';
 
 function App() {
   const [position, setPosition] = useState<[number, number] | null>(null); // The user's current position
