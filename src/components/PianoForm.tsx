@@ -204,6 +204,16 @@ export default function PianoForm({
 
       {/* Image upload button */}
       <div className='flex flex-col items-center'>
+
+        {/* Image preview */}
+        {image &&
+          <div className='flex flex-col items-center py-3'>
+            <img className='w-1/2' src={URL.createObjectURL(image)}/>
+            <p>{image.name}</p>
+          </div>
+        }
+
+        {/* Upload button */}
         <button
           className={`mx-auto flex px-5 gap-2 items-center bg-gray-300 font-medium py-1 rounded border-dashed border-2 border-gray-400`}
           onClick={handleButtonClick}
