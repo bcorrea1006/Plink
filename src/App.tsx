@@ -91,7 +91,7 @@ function App() {
         }`}
       >
         {isModalOpen && <Modal onToggleModal={() => setIsModalOpen(!isModalOpen)}/>}
-        <div className='absolute top-25 left-1.5 z-25'>
+        <div className='absolute top-4 left-20 z-25'>
           <ThemeToggle
             isLight={isLight}
             onToggle={() => setIsLight((prev) => !prev)}
