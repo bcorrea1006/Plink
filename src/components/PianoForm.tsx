@@ -216,7 +216,8 @@ export function PianoForm({
 
         {/* Upload button */}
         <button
-          className={`mx-auto flex px-5 gap-2 items-center bg-gray-300 font-medium py-1 rounded border-dashed border-2 border-gray-400`}
+          className={`mx-auto flex px-5 gap-2 items-center font-medium py-1
+            rounded border-dashed border-2 border-gray-400 bg-black/25`}
           onClick={handleButtonClick}
           >
           <ImagePlus />
@@ -235,7 +236,8 @@ export function PianoForm({
 
       <button
         type='submit'
-        className={`block mx-auto max-w-sm w-3/4 mt-8 bg-blue-500 text-white font-medium py-2 rounded hover:bg-blue-600 transition`}
+        className={`block mx-auto max-w-sm w-3/4 mt-8 bg-blue-500 text-white
+          font-medium py-2 rounded hover:bg-blue-600 transition border`}
       >
         Submit
       </button>
