@@ -9,7 +9,7 @@ type PianoFormProps = {
   onUpdate: (updatePiano: PianoDetail) => void;
 };
 
-export default function PianoForm({
+export function PianoForm({
   location,
   onUpdate,
 }: PianoFormProps) {
