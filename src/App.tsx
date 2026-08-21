@@ -11,7 +11,6 @@ import { ThemeContext } from './components/context/ThemeContext';
 // Types
 import type { PianoDetail } from './types/piano';
 import type { PianoDraft } from './types/pianoDraft';
-import type { Review } from './types/review';
 
 function App() {
   const [position, setPosition] = useState<[number, number] | null>(null); // The user's current position
@@ -42,10 +41,7 @@ function App() {
     setIsModalOpen(true);
 
     setPianoDraft({
-      location: {
-        latitude: position[0],
-        longitude: position[1]
-      },
+      location: position
     });
   }
 
@@ -90,7 +86,12 @@ function App() {
           isLight ? 'light-theme' : 'dark-theme'
         }`}
       >
-        {isModalOpen && <Modal onToggleModal={() => setIsModalOpen(!isModalOpen)}/>}
+        {isModalOpen && pianoDraft &&
+          <Modal
+            onToggleModal={() => setIsModalOpen(!isModalOpen)}
+            location={pianoDraft.location}
+            updatePianos={() => addPiano}
+          />}
         <div className='absolute top-4 left-20 z-25'>
           <ThemeToggle
             isLight={isLight}
