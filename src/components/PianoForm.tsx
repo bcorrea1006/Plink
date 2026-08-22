@@ -216,6 +216,7 @@ export function PianoForm({
 
         {/* Upload button */}
         <button
+          type='button'
           className={`mx-auto flex px-5 gap-2 items-center font-medium py-1
             rounded border-dashed border-2 border-gray-400 bg-black/25`}
           onClick={handleButtonClick}
