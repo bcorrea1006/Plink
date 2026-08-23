@@ -5,7 +5,7 @@ export const pianos: PianoDetail[]  = [
   {
     id: '1',                      // piano id
     name: 'Piano near red door',  // name
-    location: [0, 0],             // location
+    location: [48.48, -122.31],             // location
     reviews: [
       {
         id: '1',                  // Review id
@@ -23,7 +23,7 @@ export const pianos: PianoDetail[]  = [
   {
     id: '2',
     name: 'Piano by office suply shop',
-    location: [0, 1],
+    location: [48.48, -122.35],
     reviews: [
       {
         id: '2',
@@ -39,7 +39,7 @@ export const pianos: PianoDetail[]  = [
   {
     id: '3',
     name: 'Carl',
-    location: [1, 1], // TODO: Choose actual cords
+    location: [48.46, -122.31],
     reviews: [
       {
         id: '3',
