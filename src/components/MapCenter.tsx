@@ -39,8 +39,11 @@ export function MapCenter({
 }: MapCenterProps) {
   useEffect(() => {
     // msw experiment
-    console.log('fetching pianos...?')
     fetch('/pianos')
+      .then(res => res.json())
+      .then(data => console.log(data))
+
+    fetch('/error')
       .then(res => res.json())
       .then(data => console.log(data))
 
