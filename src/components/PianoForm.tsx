@@ -6,12 +6,12 @@ import type { Review } from '../types/review';
 
 type PianoFormProps = {
   location: [number, number];
-  onUpdate: (updatePiano: PianoDetail) => void;
+  addPiano: (newPiano: PianoDetail) => void;
 };
 
 export function PianoForm({
   location,
-  onUpdate,
+  addPiano,
 }: PianoFormProps) {
 
   const emptyPiano: PianoDetail = {
@@ -90,7 +90,6 @@ export function PianoForm({
     }
   }
 
-
   const handleSubmit = (e: React.FormEvent) => {
     console.log(pianoData.location); // temp for testing locations
     e.preventDefault();
@@ -98,7 +97,8 @@ export function PianoForm({
       ...pianoData,
       reviews: [reviewData],
     };
-    onUpdate(newPiano);
+    addPiano(newPiano);
+    console.log('did we update pianos?');
   };
 
   const { isLight } = useContext(ThemeContext);

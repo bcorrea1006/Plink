@@ -7,13 +7,13 @@ import type { PianoDetail } from '../types/piano';
 interface ModalProps {
   onToggleModal: () => void;
   location: [number, number];
-  updatePianos: (updated: PianoDetail) => void;
+  addPiano: (newPiano: PianoDetail) => void;
 }
 
 export function Modal({
   onToggleModal,
   location,
-  updatePianos
+  addPiano
 }: ModalProps ) {
 
   const { isLight } = useContext(ThemeContext);
@@ -29,7 +29,7 @@ export function Modal({
         <CancelButton onCancel={onToggleModal} className='absolute top-6 right-6 w-1/9'/>
         <PianoForm
           location={location}
-          onUpdate={updatePianos}
+          addPiano={addPiano}
         />
       </div>
     </div>
