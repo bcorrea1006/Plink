@@ -1,11 +1,10 @@
 import { http, HttpResponse } from 'msw'
 
 export const handlers = [
-  http.get('https://api.example.com/user', () =>  {
+  http.get('/pianos', () =>  {
     HttpResponse.json({
       id: '1',
-      firstName: 'John',
-      lastName: 'Maverick',
+      name: 'piano by red door',
     })
   }),
 ]
