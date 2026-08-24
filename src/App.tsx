@@ -73,6 +73,11 @@ function App() {
 
   // Update viewport height dynamically
   useEffect(() => {
+    // msw experiment
+    fetch('/pianos')
+      .then(res => res.json())
+      .then(data => setPianos(data))
+
     const handleResize = () => setViewportHeight(window.innerHeight);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);

@@ -30,22 +30,13 @@ export function MapCenter({
   position,
   setPosition,
   pianos,
-  selectedPiano,
   onSelectPiano,
-  onUpdatePiano,
   isPlacing,
   setIsPlacing,
   confirmPlacement,
 }: MapCenterProps) {
   useEffect(() => {
-    // msw experiment
-    fetch('/pianos')
-      .then(res => res.json())
-      .then(data => console.log(data))
-
-    fetch('/error')
-      .then(res => res.json())
-      .then(data => console.log(data))
+    console.log(pianos);
 
     // TODO: consider rendering map first then gathering location
     // Fetch initial location
