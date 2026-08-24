@@ -38,6 +38,12 @@ export function MapCenter({
   confirmPlacement,
 }: MapCenterProps) {
   useEffect(() => {
+    // msw experiment
+    console.log('fetching pianos...?')
+    fetch('/pianos')
+      .then(res => res.json())
+      .then(data => console.log(data))
+
     // TODO: consider rendering map first then gathering location
     // Fetch initial location
     if ('geolocation' in navigator) {
