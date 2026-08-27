@@ -6,7 +6,7 @@ import 'leaflet/dist/leaflet.css';
 // Local components
 import AddButton from './AddButton';
 import PlacementOverlay from './PlacementOverlay';
-import SidePanel from './SidePanel';
+import PianoPanel from './PianoPanel';
 import { CancelButton } from './CancelButton';
 // Context
 import { ThemeContext } from './context/ThemeContext';
@@ -128,14 +128,14 @@ export function MapCenter({
               </Popup>
             </Marker>
           ))}
-          <SidePanel
+          <PianoPanel
             isOpen={isOpen}
             onClose={() => {
               setIsOpen(false);
               onSelectPiano(null);
             }}
             isLight={isLight}
-          ></SidePanel>
+          ></PianoPanel>
         </MapContainer>
       ) : (
         <p className='text-center mt-10'>Fetching location...</p>

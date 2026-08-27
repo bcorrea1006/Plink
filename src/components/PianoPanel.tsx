@@ -1,14 +1,14 @@
-type SidePanelProps = {
+type PianoPanelProps = {
   isOpen: boolean;
   onClose: () => void;
   isLight: boolean;
 };
 
-export default function SidePanel({
+export default function PianoPanel({
   isOpen,
   onClose,
   isLight,
-}: SidePanelProps) {
+}: PianoPanelProps) {
   return (
     <div
       className={`
