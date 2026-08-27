@@ -39,30 +39,19 @@ function App() {
   const confirmPlacement = (position: [number, number]) => {
     setIsPlacing(false);
     setIsModalOpen(true);
-
     setPianoDraft({
       location: position
     });
   }
 
-  const addPiano = (position: [number, number]) => {
-    const newPiano: PianoDetail = {
-      id: crypto.randomUUID(),
-      name: 'placeholder',
-      location: position,
-      reviews: [
-        {
-          id: crypto.randomUUID(),
-          rating: 3,
-          tuning: 50,
-          access: 'private',
-          notes: 'placeholder'
-        },
-      ],
-    };
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  }
 
+  const addPiano = (newPiano: PianoDetail) => {
     setPianos((prev) => [...prev, newPiano]);
-    playPlink(); // Play the Plink sound!
+    playPlink();
+    toggleModal();
   };
 
   const playPlink = () => {
@@ -73,6 +62,11 @@ function App() {
 
   // Update viewport height dynamically
   useEffect(() => {
+    // Render all pianos
+    fetch('/pianos')
+      .then(res => res.json())
+      .then(data => setPianos(data))
+
     const handleResize = () => setViewportHeight(window.innerHeight);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -88,9 +82,9 @@ function App() {
       >
         {isModalOpen && pianoDraft &&
           <Modal
-            onToggleModal={() => setIsModalOpen(!isModalOpen)}
+            onToggleModal={toggleModal}
             location={pianoDraft.location}
-            updatePianos={() => addPiano}
+            addPiano={addPiano}
           />}
         <div className='absolute top-4 left-20 z-25'>
           <ThemeToggle

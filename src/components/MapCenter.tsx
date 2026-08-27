@@ -30,14 +30,14 @@ export function MapCenter({
   position,
   setPosition,
   pianos,
-  selectedPiano,
   onSelectPiano,
-  onUpdatePiano,
   isPlacing,
   setIsPlacing,
   confirmPlacement,
 }: MapCenterProps) {
   useEffect(() => {
+    console.log(pianos);
+
     // TODO: consider rendering map first then gathering location
     // Fetch initial location
     if ('geolocation' in navigator) {
@@ -112,16 +112,17 @@ export function MapCenter({
                   },
                 }}
               >
-                <div>
+                <div
+                  className=''>
                   <PianoDetails piano={piano} />
                   <button
-                    className='w-1/2 bg-blue-500 text-white font-medium py-2 rounded hover:bg-blue-600 transition'
+                    className='block w-1/2 mx-auto bg-blue-500 text-white font-medium py-2 rounded hover:bg-blue-600 transition'
                     onClick={() => {
                       setIsOpen(true);
                       onSelectPiano(piano);
                     }}
                   >
-                    Edit
+                    View
                   </button>
                 </div>
               </Popup>

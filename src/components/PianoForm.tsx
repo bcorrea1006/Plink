@@ -6,12 +6,12 @@ import type { Review } from '../types/review';
 
 type PianoFormProps = {
   location: [number, number];
-  onUpdate: (updatePiano: PianoDetail) => void;
+  addPiano: (newPiano: PianoDetail) => void;
 };
 
 export function PianoForm({
   location,
-  onUpdate,
+  addPiano,
 }: PianoFormProps) {
 
   const emptyPiano: PianoDetail = {
@@ -90,14 +90,13 @@ export function PianoForm({
     }
   }
 
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const newPiano: PianoDetail = {
       ...pianoData,
       reviews: [reviewData],
     };
-    onUpdate(newPiano);
+    addPiano(newPiano);
   };
 
   const { isLight } = useContext(ThemeContext);
@@ -216,6 +215,7 @@ export function PianoForm({
 
         {/* Upload button */}
         <button
+          type='button'
           className={`mx-auto flex px-5 gap-2 items-center font-medium py-1
             rounded border-dashed border-2 border-gray-400 bg-black/25`}
           onClick={handleButtonClick}
