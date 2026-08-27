@@ -91,14 +91,12 @@ export function PianoForm({
   }
 
   const handleSubmit = (e: React.FormEvent) => {
-    console.log(pianoData.location); // temp for testing locations
     e.preventDefault();
     const newPiano: PianoDetail = {
       ...pianoData,
       reviews: [reviewData],
     };
     addPiano(newPiano);
-    console.log('did we update pianos?');
   };
 
   const { isLight } = useContext(ThemeContext);

@@ -62,7 +62,7 @@ function App() {
 
   // Update viewport height dynamically
   useEffect(() => {
-    // msw experiment
+    // Render all pianos
     fetch('/pianos')
       .then(res => res.json())
       .then(data => setPianos(data))
