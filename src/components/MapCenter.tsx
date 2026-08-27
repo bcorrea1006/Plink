@@ -5,7 +5,6 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 // Local components
 import AddButton from './AddButton';
-import PianoDetails from './PianoDetails';
 import PlacementOverlay from './PlacementOverlay';
 import SidePanel from './SidePanel';
 import { CancelButton } from './CancelButton';
@@ -13,6 +12,7 @@ import { CancelButton } from './CancelButton';
 import { ThemeContext } from './context/ThemeContext';
 // Types
 import type { PianoDetail } from '../types/piano';
+import PianoPopup from './PianoPopup';
 
 interface MapCenterProps {
   position: [number, number] | null;
@@ -114,7 +114,7 @@ export function MapCenter({
               >
                 <div
                   className=''>
-                  <PianoDetails piano={piano} />
+                  <PianoPopup piano={piano} />
                   <button
                     className='block w-1/2 mx-auto bg-blue-500 text-white font-medium py-2 rounded hover:bg-blue-600 transition'
                     onClick={() => {

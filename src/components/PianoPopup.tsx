@@ -2,9 +2,9 @@ import { useContext } from 'react';
 import { ThemeContext } from './context/ThemeContext';
 import type { PianoDetail } from '../types/piano';
 
-type PianoDetailsProps = { piano: PianoDetail };
+type PianoPopupProps = { piano: PianoDetail };
 
-export default function PianoDetails({ piano }: PianoDetailsProps) {
+export default function PianoPopup({ piano }: PianoPopupProps) {
   const { isLight } = useContext(ThemeContext);
 
   return (
