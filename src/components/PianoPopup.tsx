@@ -9,27 +9,22 @@ export default function PianoPopup({ piano }: PianoPopupProps) {
 
   return (
     <div
-      className={isLight ? 'bg-white text-black' : 'bg-[#2c2c2c] text-white'}
-    >
+      className={isLight ?
+        'bg-white text-black' : 'bg-[#2c2c2c] text-white'}>
+      {/* TODO: Consider adding the top images here? */}
       <p>
-        <strong>id: </strong>
-        {piano.id}
+        <strong>name: </strong>
+        {piano.name}
       </p>
       <p>
-        <strong>quality: </strong>
-        {piano.reviews[0].rating}
+        <strong>overall quality: </strong>
+        {/* // TODO: Replace with actual average quality and add stars */}
+        {piano.reviews[0].rating + ' (' + piano.reviews.length + ')'}
       </p>
       <p>
-        <strong>tuned:</strong>
-        {piano.reviews[0].tuning ? ' YEAH!!' : ' naaah'}
-      </p>
-      <p>
-        <strong>access: </strong>
-        {piano.reviews[0].access}
-      </p>
-      <p>
-        <strong>notes: </strong>
-        {piano.reviews[0].notes}
+        {/* TODO: Add actual distance finding... somehow */}
+        <strong>Distance: </strong>
+        0 miles
       </p>
     </div>
   );
