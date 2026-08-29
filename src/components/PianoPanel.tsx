@@ -1,13 +1,17 @@
+import type { PianoDetail } from "../types/piano";
+
 type PianoPanelProps = {
   isOpen: boolean;
   onClose: () => void;
   isLight: boolean;
+  piano: PianoDetail
 };
 
 export default function PianoPanel({
   isOpen,
   onClose,
   isLight,
+  piano
 }: PianoPanelProps) {
   return (
     <div

@@ -30,6 +30,7 @@ export function MapCenter({
   position,
   setPosition,
   pianos,
+  selectedPiano,
   onSelectPiano,
   isPlacing,
   setIsPlacing,
@@ -128,14 +129,17 @@ export function MapCenter({
               </Popup>
             </Marker>
           ))}
-          <PianoPanel
-            isOpen={isOpen}
-            onClose={() => {
-              setIsOpen(false);
-              onSelectPiano(null);
-            }}
-            isLight={isLight}
-          ></PianoPanel>
+          { selectedPiano &&
+            (<PianoPanel
+              isOpen={isOpen}
+              onClose={() => {
+                setIsOpen(false);
+                onSelectPiano(null);
+              }}
+              isLight={isLight}
+              piano={selectedPiano}>
+            </PianoPanel>)
+          }
         </MapContainer>
       ) : (
         <p className='text-center mt-10'>Fetching location...</p>
