@@ -1,18 +1,19 @@
 // External libraries
 import { useContext, useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { motion, AnimatePresence } from 'motion/react';
 // Side effects
 import 'leaflet/dist/leaflet.css';
 // Local components
 import AddButton from './AddButton';
 import PlacementOverlay from './PlacementOverlay';
-import PianoPanel from './PianoPanel';
+import { PianoPanel } from './PianoPanel';
 import { CancelButton } from './CancelButton';
+import PianoPopup from './PianoPopup';
 // Context
 import { ThemeContext } from './context/ThemeContext';
 // Types
 import type { PianoDetail } from '../types/piano';
-import PianoPopup from './PianoPopup';
 
 interface MapCenterProps {
   position: [number, number] | null;
@@ -129,17 +130,28 @@ export function MapCenter({
               </Popup>
             </Marker>
           ))}
-          { selectedPiano &&
-            (<PianoPanel
-              isOpen={isOpen}
-              onClose={() => {
-                setIsOpen(false);
-                onSelectPiano(null);
-              }}
-              isLight={isLight}
-              piano={selectedPiano}>
-            </PianoPanel>)
-          }
+          <AnimatePresence>
+            { selectedPiano && (
+              <PianoPanel
+                isOpen={isOpen}
+                onClose={() => {
+                  setIsOpen(false);
+                  onSelectPiano(null);
+                }}
+                isLight={isLight}
+                piano={selectedPiano}
+                initial={{ x: 410 }}
+                animate={{ x: 60 }}
+                exit={{ x: 410 }}
+                transition={{
+                  type: 'tween',
+                  duration: 1.0,
+                  delay: 0,
+                  ease: 'anticipate',
+                }}
+              />
+            )}
+          </AnimatePresence>
         </MapContainer>
       ) : (
         <p className='text-center mt-10'>Fetching location...</p>
