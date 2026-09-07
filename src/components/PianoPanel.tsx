@@ -1,5 +1,6 @@
 import type { PianoDetail } from '../types/piano';
 import { motion, type HTMLMotionProps } from 'motion/react';
+import { PianoOverview } from './PianoOverview';
 
 interface PianoPanelProps extends HTMLMotionProps<'div'> {
   isOpen: boolean;
@@ -23,12 +24,15 @@ export function PianoPanel({
       `}
       onClick={(e) => e.stopPropagation()}
     >
-      {/* Close Panel Button */}
-      <div className='p-4 pr-20 border-b flex justify-between items-baseline'>
-        <h2 className='text-lg font-bold'>Piano Details... </h2>
-        <button onClick={onClose} className='text-gray-500 hover:text-black'>
-          ✕
-        </button>
+      <div className='flex flex-col'>
+        {/* Close Panel Button */}
+        <div className='p-4 pr-20 border-b flex justify-between items-baseline'>
+          <h2 className='text-lg font-bold'>Piano Details... </h2>
+          <button onClick={onClose} className='text-gray-500 hover:text-black'>
+            ✕
+          </button>
+        </div>
+        <PianoOverview piano={piano} />
       </div>
     </motion.div>
   );
