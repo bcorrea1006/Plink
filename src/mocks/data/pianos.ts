@@ -45,13 +45,68 @@ export const pianos: PianoDetail[]  = [
         id: '3',
         rating: 4,
         tuning: 80,
-        access: 'restricted',
+        access: 'public',
         notes: 'THIS IS THE BEST PIANO IVE EVER SEEN!',
         images: [
           'https://godly-piano.png',
           'https://img2.jpg-or-something'
         ]
-      }
+      },
+      {
+        id: '4',
+        rating: 3.5,
+        tuning: 82,
+        access: 'public',
+        notes: 'Pretty good piano',
+        images: [
+          'https://godly-piano.png',
+          'https://img2.jpg-or-something'
+        ]
+      },
+      {
+        id: '5',
+        rating: 5,
+        tuning: 75,
+        access: 'restricted',
+        notes: 'This piano saved my life.',
+        images: [
+          'https://godly-piano.png',
+          'https://img2.jpg-or-something'
+        ]
+      },
+      {
+        id: '6',
+        rating: 3,
+        tuning: 70,
+        access: 'restricted',
+        notes: 'its Carl. What can I say?',
+        images: [
+          'https://godly-piano.png',
+          'https://img2.jpg-or-something'
+        ]
+      },
+      {
+        id: '7',
+        rating: 3,
+        tuning: 70,
+        access: 'private',
+        notes: 'Carl for president!',
+        images: [
+          'https://godly-piano.png',
+          'https://img2.jpg-or-something'
+        ]
+      },
+      {
+        id: '8',
+        rating: 3,
+        tuning: 70,
+        access: 'private',
+        notes: 'Sonorous tone and beautiful melodies.',
+        images: [
+          'https://godly-piano.png',
+          'https://img2.jpg-or-something'
+        ]
+      },
     ]
   },
 ]
