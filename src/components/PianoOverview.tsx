@@ -37,14 +37,13 @@ export function PianoOverview({ piano }: PianoOverviewProps) {
     <div className='p-4 pr-20'>
       <img /> { /** TODO: add actual images from DB **/}
       <h2>
-        <b>Name: </b>
-        { piano.name } </h2>
-      <h2>
         <b>Rating: </b>
-        { getAverage(ratings).toFixed(2) + ' (' + ratings.length + ')' } </h2>
+        { getAverage(ratings).toFixed(2) + ' (' + ratings.length + ')' }
+      </h2>
       <h2>
         <b>Tuning: </b>
-        { getAverage(tunings).toFixed(2) } average tuning score </h2>
+        { getAverage(tunings).toFixed(2) } average tuning score
+      </h2>
       <h2>
         <b>Access: </b>
         {
@@ -57,7 +56,8 @@ export function PianoOverview({ piano }: PianoOverviewProps) {
         <b>Distance: </b>
         TODO: ADD THIS LATER
       </h2>
-      <button className='block w-1/2 mx-auto my-4 bg-blue-500 text-white
+      <button
+        className='block w-1/2 mx-auto my-4 bg-blue-500 text-white
         font-medium py-2 rounded hover:bg-blue-600 transition'
       > Directions </button>
     </div>

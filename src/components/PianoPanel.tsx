@@ -27,7 +27,7 @@ export function PianoPanel({
       <div className='flex flex-col'>
         {/* Close Panel Button */}
         <div className='p-4 pr-20 border-b flex justify-between items-baseline'>
-          <h2 className='text-lg font-bold'>Piano Details... </h2>
+          <h2 className='text-lg font-bold'>{ piano.name }</h2>
           <button onClick={onClose} className='text-gray-500 hover:text-black'>
             ✕
           </button>
